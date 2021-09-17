@@ -1,0 +1,47 @@
+<header>
+        <div class="main-menu">
+            <div class="container">
+                {% if current_user.is_authenticated %}
+                <div class="welcome">Welcome To BookStore :{{ current_user.Ho }} {{ current_user.Ten }} </div>
+                {% endif %}
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <h1 class="text-success">LT BOOKSTORE</h1>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon" ></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        </ul>
+                        <ul class="navbar-nav ml-auto">
+                            <li class="navbar-item active">
+                                <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                            </li>
+                            <li class="navbar-item">
+                                <a href="{{ url_for('book_list') }}" class="nav-link">Search</a>
+                            </li>
+                            <li class="navbar-item">
+                                <a href="{{ url_for('about_us') }}" class="nav-link">About Us</a>
+                            </li>
+                            <li class="navbar-item">
+                                <a href="{{ url_for('pri_policy') }}" class="nav-link">Privacy</a>
+                            </li>
+                            {% if current_user.is_authenticated %}
+                                <li class="navbar-item">
+                                    <a href="{{ url_for('logout_usr') }}" class="nav-link">Logout</a>
+                                </li>
+                            {% else %}
+                                <li class="navbar-item">
+                                    <a href="{{ url_for('login_usr') }}" class="nav-link">Login</a>
+                                </li>
+                            {% endif %}
+                             <li class="navbar-item">
+	                                <a href="{{ url_for('registerCustomer') }}" class="nav-link">Signup</a>
+                             </li>
+                        </ul>
+                        <form class="form-inline my-2 my-lg-0" action="/book">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search here..." aria-label="Search" name="kw2">
+                        </form>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>

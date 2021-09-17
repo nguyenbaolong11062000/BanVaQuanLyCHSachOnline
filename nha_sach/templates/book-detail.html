@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Detail</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body style="background-image: url('../static/images/product2.jpg');">
+    <div class="container">
+        <h1 class="text-center text-danger">{{ book.TuaSach }}</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{{ url_for('static', filename=book.HinhAnh) }}" />
+            </div>
+            <div class="col-md-6">
+                <h3>
+                    <ul>
+                        <li>{{ book.MoTaSach }}</li>
+                        <li>{{ book.ma_loaiSach.MieuTaLoaiSach }}</li>
+                        <li>Publishing Year: {{ book.NamXuatBan }}</li>
+                        <li>{{ "{:,.1f}".format(book.GiaBia) }} VNĐ</li>
+                    </ul>
+                </h3>
+            </div>
+        </div>
+        </div>
+</body>
+</html>
