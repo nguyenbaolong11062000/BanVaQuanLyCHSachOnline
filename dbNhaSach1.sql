@@ -41,7 +41,7 @@ CREATE TABLE `chitietdonhang` (
 
 LOCK TABLES `chitietdonhang` WRITE;
 /*!40000 ALTER TABLE `chitietdonhang` DISABLE KEYS */;
-INSERT INTO `chitietdonhang` VALUES (1,1,4,119500,0),(2,1,12,119500,0),(3,1,5,119500,0),(4,2,2,115000,0);
+INSERT INTO `chitietdonhang` VALUES (1,1,6,119500,0),(1,2,2,115000,0),(2,1,1,119500,0),(3,1,3,119500,0),(3,2,3,115000,0);
 /*!40000 ALTER TABLE `chitietdonhang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,7 +59,7 @@ CREATE TABLE `donhang` (
   PRIMARY KEY (`MaDH`),
   KEY `ma_kh` (`ma_kh`),
   CONSTRAINT `donhang_ibfk_1` FOREIGN KEY (`ma_kh`) REFERENCES `khachhang` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +68,7 @@ CREATE TABLE `donhang` (
 
 LOCK TABLES `donhang` WRITE;
 /*!40000 ALTER TABLE `donhang` DISABLE KEYS */;
-INSERT INTO `donhang` VALUES (1,'2021-09-17 13:09:39',2),(2,'2021-09-17 13:29:01',2),(3,'2021-09-17 14:20:10',2),(4,'2021-09-17 14:28:28',2);
+INSERT INTO `donhang` VALUES (1,'2021-09-18 10:54:25',2),(2,'2021-09-18 14:10:54',2),(3,'2021-09-18 14:34:37',2);
 /*!40000 ALTER TABLE `donhang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -225,4 +225,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-09-17 15:19:13
+-- Dump completed on 2021-09-18 14:38:23

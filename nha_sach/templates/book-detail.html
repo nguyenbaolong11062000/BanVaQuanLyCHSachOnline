@@ -18,10 +18,19 @@
                 <h3>
                     <ul>
                         <li>{{ book.MoTaSach }}</li>
-                        <li>{{ book.ma_loaiSach.MieuTaLoaiSach }}</li>
-                        <li>Publishing Year: {{ book.NamXuatBan }}</li>
-                        <li>{{ "{:,.1f}".format(book.GiaBia) }} VNĐ</li>
+                        <li>Năm Xuất Bản: {{ book.NamXuatBan }}</li>
+                        <li>Giá Tiền: {{ "{:,.1f}".format(book.GiaBia) }} VNĐ</li>
+
                     </ul>
+                    <div class="row">
+                        <div class="btn btn-danger col-md-2" >
+                            <a href="javascript:;"
+                               onclick="addToCart({{ book.MaSach }}, '{{book.TuaSach}}', {{ book.GiaBia }})"><h5>MUA</h5></a>
+                        </div>
+                        <div class="col-md-6">
+                            <a class="badge badge-primary" href=" {{ url_for('payment') }} " id="cart-info"></a>
+                        </div>
+                    </div>
                 </h3>
             </div>
         </div>

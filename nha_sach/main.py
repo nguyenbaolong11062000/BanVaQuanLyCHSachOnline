@@ -26,15 +26,14 @@ def about_us():
 @app.route('/book')
 @decorator.login_required
 def book_list():
-    tpbook_id = request.args.get('typeofbook_id')
-    #typebook = request.args.get('typebook')
+    book_id = request.args.get('book_id')
     kw = request.args.get('kw')
     kw2 = request.args.get('kw2')
     from_price = request.args.get('from_price')
     to_price = request.args.get('to_price')
-    books = utils.read_books(tpbook_id=tpbook_id, kw=kw, kw2=kw2, from_price=from_price, to_price=to_price)
+    books = utils.read_books(book_id=book_id, kw=kw, kw2=kw2, from_price=from_price, to_price=to_price)
     return render_template('book-list.html',
-                           books=books, tpbook_id=tpbook_id)
+                           books=books, book_id=book_id)
 
 #xem thông tin chi tiết một cuốn sách
 @app.route('/books/<int:book_id>')

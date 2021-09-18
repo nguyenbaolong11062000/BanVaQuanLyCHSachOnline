@@ -39,6 +39,9 @@ class LoaiSach(db.Model):
     MieuTaLoaiSach = Column(String(100), nullable=True)
     sach = relationship('Sach', backref='LoaiSach', lazy=True)
 
+    def __str__(self):
+        return self.MieuTaLoaiSach
+
 
 class Sach(db.Model):
     __tablename__ = 'Sach'
@@ -52,6 +55,9 @@ class Sach(db.Model):
     ma_loaiSach = Column(Integer, ForeignKey(LoaiSach.MaLoaiSach), nullable=False)
     chiTiet_DH = relationship('ChiTietDonHang', backref='Sach', lazy=True)
     tg_vietsach = relationship('TacGiaVietSach', backref='Sach', lazy=True)
+
+    def __str__(self):
+        return self.TuaSach
 
 
 class DonHang(db.Model):
@@ -78,6 +84,9 @@ class TacGia(db.Model):
     HinhAnh = Column(String(50))
     TieuSu = Column(String(50))
     tg_vietsach = relationship('TacGiaVietSach', backref='TacGia', lazy=True)
+
+    def __str__(self):
+        return self.Ten
 
 class TacGiaVietSach(db.Model):
     __tablename__ = 'TacGiaVietSach'
