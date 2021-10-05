@@ -22,6 +22,7 @@ def read_books(book_id=None, kw=None, kw2=None, from_price=None, to_price=None):
 def get_book_by_id(book_id):
     return Sach.query.get(book_id)
 
+
 #kiểm tra đăng nhập admin
 def check_login(username, password, role = UserRole.ADMIN):
     password = str(hashlib.md5(password.strip().encode('utf-8')).hexdigest())
@@ -63,7 +64,7 @@ def cart_stats(cart):
 #ghi nhận hóa đơn xuống CSDL
 def add_receipt(cart):
     if cart and current_user.is_authenticated:
-        receipt = DonHang(ma_kh=current_user.id)
+        receipt = DonHang(ma_kh=current_user.MaKH)
         db.session.add(receipt)
 
         for p in list(cart.values()):

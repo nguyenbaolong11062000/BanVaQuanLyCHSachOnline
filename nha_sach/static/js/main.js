@@ -74,3 +74,23 @@ function update_book(obj, item_id) {
             }
         }).catch(err => console.log('Cập nhật thất bại!'));
 }
+
+function hienThi() {
+    let xemThongTinTG = document.getElementById("popup-author");
+    let xemChiTiet = document.querySelector(".popup"); //phương thức này để trả về thành phần đầu tiên
+    let nutDong = document.querySelector(".close-btn");
+    //Hiển thị popup
+    xemThongTinTG.onclick = function(){
+        xemChiTiet.style.display = "block"
+    }
+    // Đóng popup khi ấn vào nút đóng
+    nutDong.onclick = function(){
+        xemChiTiet.style.display = "none"
+    }
+    // Đóng popup khi nhấp chuột vào bất kỳ chỗ nào trên màn hình
+    window.onclick = function(e){
+        if(e.target == xemChiTiet){
+            xemChiTiet.style.display = "none"
+        }
+    }
+}

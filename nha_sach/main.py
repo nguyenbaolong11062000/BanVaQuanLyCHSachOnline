@@ -42,6 +42,8 @@ def book_detail(book_id):
     return render_template('book-detail.html',
                            book=book)
 
+
+
 #đăng nhập khách hàng
 @app.route('/login-user', methods=['POST', 'GET'])
 def login_usr():

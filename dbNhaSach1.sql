@@ -41,7 +41,7 @@ CREATE TABLE `chitietdonhang` (
 
 LOCK TABLES `chitietdonhang` WRITE;
 /*!40000 ALTER TABLE `chitietdonhang` DISABLE KEYS */;
-INSERT INTO `chitietdonhang` VALUES (1,1,6,119500,0),(1,2,2,115000,0),(2,1,1,119500,0),(3,1,3,119500,0),(3,2,3,115000,0);
+INSERT INTO `chitietdonhang` VALUES (1,1,1,119500,0),(1,2,1,115000,0),(1,3,3,92600,0),(2,1,3,119500,0),(2,2,3,115000,0),(2,3,3,92600,0),(2,4,3,92650,0),(3,1,2,119500,0),(3,2,2,115000,0),(4,1,4,119500,0);
 /*!40000 ALTER TABLE `chitietdonhang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,8 +58,8 @@ CREATE TABLE `donhang` (
   `ma_kh` int NOT NULL,
   PRIMARY KEY (`MaDH`),
   KEY `ma_kh` (`ma_kh`),
-  CONSTRAINT `donhang_ibfk_1` FOREIGN KEY (`ma_kh`) REFERENCES `khachhang` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  CONSTRAINT `donhang_ibfk_1` FOREIGN KEY (`ma_kh`) REFERENCES `khachhang` (`MaKH`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +68,7 @@ CREATE TABLE `donhang` (
 
 LOCK TABLES `donhang` WRITE;
 /*!40000 ALTER TABLE `donhang` DISABLE KEYS */;
-INSERT INTO `donhang` VALUES (1,'2021-09-18 10:54:25',2),(2,'2021-09-18 14:10:54',2),(3,'2021-09-18 14:34:37',2);
+INSERT INTO `donhang` VALUES (1,'2021-09-23 19:11:47',2),(2,'2021-09-23 19:40:48',2),(3,'2021-10-05 12:20:30',2),(4,'2021-10-05 12:33:24',2);
 /*!40000 ALTER TABLE `donhang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,7 +80,7 @@ DROP TABLE IF EXISTS `khachhang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `khachhang` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `MaKH` int NOT NULL AUTO_INCREMENT,
   `Ho` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Ten` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Email` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -91,7 +91,7 @@ CREATE TABLE `khachhang` (
   `SoDT` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `HoatDonng` tinyint(1) DEFAULT NULL,
   `VaiTro` enum('KH','ADMIN') COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`MaKH`),
   UNIQUE KEY `TenDangNhap` (`TenDangNhap`),
   CONSTRAINT `khachhang_chk_1` CHECK ((`HoatDonng` in (0,1)))
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -103,7 +103,7 @@ CREATE TABLE `khachhang` (
 
 LOCK TABLES `khachhang` WRITE;
 /*!40000 ALTER TABLE `khachhang` DISABLE KEYS */;
-INSERT INTO `khachhang` VALUES (1,NULL,'ADMIN1','admin1@ou.edu.vn','admin1','e10adc3949ba59abbe56e057f20f883e','male',NULL,'0937752035',NULL,'ADMIN'),(2,'Nguyễn','Bảo Long','1851050083long@ou.edu.vn','user2','e10adc3949ba59abbe56e057f20f883e','male','images/upload/nhi.png','0937752035',1,'KH');
+INSERT INTO `khachhang` VALUES (1,NULL,'ADMIN1','admin1@ou.edu.vn','admin1','e10adc3949ba59abbe56e057f20f883e','male',NULL,'0937752035',NULL,'ADMIN'),(2,'Nguyễn','Bảo Long','1851050083long@ou.edu.vn','user2','e10adc3949ba59abbe56e057f20f883e','male','images/upload/iphone11.png','0937752035',1,'KH');
 /*!40000 ALTER TABLE `khachhang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,7 +118,7 @@ CREATE TABLE `loaisach` (
   `MaLoaiSach` int NOT NULL AUTO_INCREMENT,
   `MieuTaLoaiSach` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`MaLoaiSach`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,7 +127,7 @@ CREATE TABLE `loaisach` (
 
 LOCK TABLES `loaisach` WRITE;
 /*!40000 ALTER TABLE `loaisach` DISABLE KEYS */;
-INSERT INTO `loaisach` VALUES (1,'Chính Trị - Xã Hội - Triết Học'),(2,'Giáo dục');
+INSERT INTO `loaisach` VALUES (1,'Chính Trị - Xã Hội - Triết Học'),(2,'Giáo dục'),(3,'Tiểu Thuyết');
 /*!40000 ALTER TABLE `loaisach` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,7 +149,7 @@ CREATE TABLE `sach` (
   PRIMARY KEY (`MaSach`),
   KEY `ma_loaiSach` (`ma_loaiSach`),
   CONSTRAINT `sach_ibfk_1` FOREIGN KEY (`ma_loaiSach`) REFERENCES `loaisach` (`MaLoaiSach`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +158,7 @@ CREATE TABLE `sach` (
 
 LOCK TABLES `sach` WRITE;
 /*!40000 ALTER TABLE `sach` DISABLE KEYS */;
-INSERT INTO `sach` VALUES (1,'The Prince (Quân vương)','Đây là bản đề cương kế hoạch nổi tiếng nhất thế giới về việc nắm bắt và giữ vững quyền lực',119500,'images/the prince.jpg',2013,1),(2,'Sách Giáo Khoa Lớp 5','Nhiều môn học của Lớp 5',115000,'images/SGK5.png',2010,2);
+INSERT INTO `sach` VALUES (1,'The Prince (Quân vương)','Đây là bản đề cương kế hoạch nổi tiếng nhất thế giới về việc nắm bắt và giữ vững quyền lực',119500,'images/the prince.jpg',2013,1),(2,'Sách Giáo Khoa Lớp 5','Nhiều môn học của Lớp 5',115000,'images/SGK5.png',2010,2),(3,'Bàn Về Khế Ước Xã Hội','Chứa đựng những tư tưởng tyên phong về cách mạng dân chủ',92600,'images/banKheUoc.jpg',2018,1),(4,'Chiến binh cầu vồng','Tình yêu trong sáng tuổi học trò lẫn những trò đùa tinh quái',92650,'images/chienBinhCV.jpg',2020,3);
 /*!40000 ALTER TABLE `sach` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,7 +176,7 @@ CREATE TABLE `tacgia` (
   `HinhAnh` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `TieuSu` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`MaTG`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -185,7 +185,7 @@ CREATE TABLE `tacgia` (
 
 LOCK TABLES `tacgia` WRITE;
 /*!40000 ALTER TABLE `tacgia` DISABLE KEYS */;
-INSERT INTO `tacgia` VALUES (1,NULL,'Niccolò Machiavelli','images/author the prince.jpg',' Nhà ngoại giao, triết học và nhà sử học người Ý'),(2,NULL,'Nhà Xuất Bản Giáo Dục','images/SGK5.png','Nhà Xuất Bản Sách');
+INSERT INTO `tacgia` VALUES (1,'Machiavelli','Niccolò','images/author the prince.jpg',' Nhà ngoại giao, triết học và nhà sử học người Ý'),(2,NULL,'Nhà Xuất Bản Giáo Dục','images/SGK5.png','Nhà Xuất Bản Sách'),(3,'Rousseau','Jean - Jacques ','images/banKheUocTacGia.jpg','Là một nhà triết học thuộc trào lưu Khai sáng'),(4,' Hirata','Andrea','images/chienBinhCV_tacGia.jpg','Một tác giả người Indonesia');
 /*!40000 ALTER TABLE `tacgia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,7 +212,7 @@ CREATE TABLE `tacgiavietsach` (
 
 LOCK TABLES `tacgiavietsach` WRITE;
 /*!40000 ALTER TABLE `tacgiavietsach` DISABLE KEYS */;
-INSERT INTO `tacgiavietsach` VALUES (1,1),(2,2);
+INSERT INTO `tacgiavietsach` VALUES (1,1),(2,2),(3,3),(4,4);
 /*!40000 ALTER TABLE `tacgiavietsach` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -225,4 +225,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-09-18 14:38:23
+-- Dump completed on 2021-10-05 13:35:39

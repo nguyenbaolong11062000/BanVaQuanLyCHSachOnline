@@ -15,7 +15,7 @@ class UserRole(UserEnum):
 class KhachHang(db.Model, UserMixin):
     __tablename__ = 'KhachHang'
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    MaKH = Column(Integer, primary_key=True, autoincrement=True)
     Ho = Column(String(50), nullable=True)
     Ten = Column(String(50), nullable=True)
     Email = Column(String(50))
@@ -27,6 +27,11 @@ class KhachHang(db.Model, UserMixin):
     HoatDonng = Column(Boolean, default=True)
     VaiTro = Column(Enum(UserRole), default=UserRole.KH)
     don_hang = relationship('DonHang', backref='TenKH', lazy=True)
+
+    #định nghĩa lại hàm decorator @login.user_loader vì mặc định khi gọi login_user
+    #nó sẽ gọi thuộc tính "id" của bảng KhachHang nên cần phải định nghĩa lại là "id" là "MaKH"
+    def get_id(self):
+        return self.MaKH
 
     def __str__(self):
         return self.Ten
@@ -64,7 +69,7 @@ class DonHang(db.Model):
     __tablename__ = 'DonHang'
     MaDH = Column(Integer, primary_key=True, autoincrement=True)
     NgayMua = Column(DateTime, default=datetime.today())
-    ma_kh = Column(Integer, ForeignKey(KhachHang.id), nullable=False)
+    ma_kh = Column(Integer, ForeignKey(KhachHang.MaKH), nullable=False)
     chiTiet_DH = relationship('ChiTietDonHang', backref='DonHang', lazy=True)
 
 
@@ -92,7 +97,6 @@ class TacGiaVietSach(db.Model):
     __tablename__ = 'TacGiaVietSach'
     ma_tg = Column(Integer, ForeignKey(TacGia.MaTG), primary_key=True)
     ma_sach = Column(Integer, ForeignKey(Sach.MaSach), primary_key=True)
-
 
 
 if __name__ == '__main__':
