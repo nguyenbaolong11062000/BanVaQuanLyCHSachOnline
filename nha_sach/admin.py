@@ -6,18 +6,18 @@ from flask_admin import BaseView, expose
 from nha_sach.models import *
 
 
-class ContactView(BaseView):
+class LienHe(BaseView):
     @expose('/')
     def index(self):
         return self.render('admin/contact.html')
 
 
-class AboutUsView(BaseView):
+class GioiThieu(BaseView):
     @expose('/')
     def index(self):
         return self.render('admin/about-us.html')
 
-class LoaiSachView(ModelView):
+class BangLoaiSach(ModelView):
     column_display_pk = True;
     can_export = True
 
@@ -25,36 +25,21 @@ class LoaiSachView(ModelView):
         return current_user.is_authenticated
 
 
-class SachView(ModelView):
+class BangSach(ModelView):
     column_display_pk = True;
     can_export = True
 
     def is_accessible(self):
         return current_user.is_authenticated
 
-class TacGiaView(ModelView):
+class BangTacGia(ModelView):
     column_display_pk = True;
     can_export = True
 
     def is_accessible(self):
         return current_user.is_authenticated
 
-class TacGiaVietSachView(ModelView):
-    column_display_pk = True;
-    can_export = True
-
-    def is_accessible(self):
-        return current_user.is_authenticated
-
-
-class DonHangView(ModelView):
-    column_display_pk = True;
-    can_export = True
-
-    def is_accessible(self):
-        return current_user.is_authenticated
-
-class ChiTietDonHangView(ModelView):
+class BangTacGiaVietSach(ModelView):
     column_display_pk = True;
     can_export = True
 
@@ -62,15 +47,30 @@ class ChiTietDonHangView(ModelView):
         return current_user.is_authenticated
 
 
-
-class KhachHangView(ModelView):
+class BangDonHang(ModelView):
     column_display_pk = True;
     can_export = True
 
     def is_accessible(self):
         return current_user.is_authenticated
 
-class LogoutView(BaseView):
+class BangChiTietDonHang(ModelView):
+    column_display_pk = True;
+    can_export = True
+
+    def is_accessible(self):
+        return current_user.is_authenticated
+
+
+
+class BangKhacHang(ModelView):
+    column_display_pk = True;
+    can_export = True
+
+    def is_accessible(self):
+        return current_user.is_authenticated
+
+class DangXuat(BaseView):
     @expose('/')
     def logout(self):
         logout_user()
@@ -81,13 +81,13 @@ class LogoutView(BaseView):
         return current_user.is_authenticated
 
 
-admin.add_view(KhachHangView(KhachHang, db.session))
-admin.add_view(LoaiSachView(LoaiSach, db.session))
-admin.add_view(SachView(Sach, db.session))
-admin.add_view(TacGiaView(TacGia, db.session))
-admin.add_view(TacGiaVietSachView(TacGiaVietSach, db.session))
-admin.add_view(DonHangView(DonHang, db.session))
-admin.add_view(ChiTietDonHangView(ChiTietDonHang, db.session))
-admin.add_view(ContactView(name='Liên hệ'))
-admin.add_view(AboutUsView(name='About Us'))
-admin.add_view(LogoutView(name='Logout'))
+admin.add_view(BangKhacHang(KhachHang, db.session, name='Khách Hàng'))
+admin.add_view(BangLoaiSach(LoaiSach, db.session, name='Loại Sách'))
+admin.add_view(BangSach(Sach, db.session, name='Sách'))
+admin.add_view(BangTacGia(TacGia, db.session, name='Tác Giả'))
+admin.add_view(BangTacGiaVietSach(TacGiaVietSach, db.session, name='Tác Giả Viết Sách'))
+admin.add_view(BangDonHang(DonHang, db.session, name='Đơn Hàng'))
+admin.add_view(BangChiTietDonHang(ChiTietDonHang, db.session, name='Chi Tiết Đơn Hàng'))
+admin.add_view(LienHe(name='Liên hệ'))
+admin.add_view(GioiThieu(name='Giới Thiệu'))
+admin.add_view(DangXuat(name='Đăng Xuất'))

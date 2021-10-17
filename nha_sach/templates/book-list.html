@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Search Books</title>
+    <title>Tìm Kiếm Sách</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -11,62 +11,62 @@
 <body style="background-image: url('../static/images/wave.png');">
     <div class="container">
         <h1 class="text-center text-danger">
-            LIST OF BOOKS
-            <a class="badge badge-primary" href=" {{ url_for('payment') }} " id="cart-info">
+            DANH MỤC SÁCH
+            <a class="badge badge-primary" href=" {{ url_for('chuyenSang_thanhToan') }} " id="thongTinGioHang">
                   <i class="fa fa-shopping-cart"></i></a>
         </h1>
         <div>
             <form>
                 <div class="form-group">
                     <input class="form-control"
-                           name="kw"
-                           placeholder="Enter keywords to find..." />
+                           name="ten_sach"
+                           placeholder="Nhập tên sách..." />
                 </div>
                 <div class="form-group">
                     <input class="form-control"
-                           name="kw2"
-                           placeholder="Enter author to find..." />
+                           name="tac_gia"
+                           placeholder="Nhập tên tác giả..." />
                 </div>
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <input type="number"
-                               name="from_price"
+                               name="gia_batDau"
                                class="form-control"
-                               placeholder="Enter a starting price..." />
+                               placeholder="Nhập giá bắt đầu..." />
                     </div>
                     <div class="col-md-6 form-group">
                         <input type="number"
-                               name="to_price"
+                               name="gia_ketThuc"
                                class="form-control"
-                               placeholder="Enter an end price..." />
+                               placeholder="Nhập giá kết thúc..." />
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Search" class="btn btn-danger" />
+                    <input type="submit" value="Tìm kiếm" class="btn btn-danger" />
                 </div>
             </form>
         </div>
         <table class="table">
             <tr>
                 <th></th>
-                <th><h5 class="text-center">Id</h5></th>
-                <th><h5 class="text-center">Name</h5></th>
-                <th><h5 class="text-center">Price</h5></th>
+                <th><h5 class="text-center">STT</h5></th>
+                <th><h5 class="text-center">Tên</h5></th>
+                <th><h5 class="text-center">Giá</h5></th>
                 <th></th>
             </tr>
-            {% for p in books %}
+            {% for p in sach %}
             <tr>
                 <td class="text-center">
                     <img width="120" src="{{ url_for('static', filename=p.HinhAnh) }}" alt="{{ p.TuaSach }}" />
                 </td>
                 <td class="text-center"> <h5>{{ p.MaSach }}</h5> </td>
                 <td class="text-center">
-                    <a href="{{ url_for('book_detail', book_id=p.MaSach) }}"><h5 class="text-dark">{{ p.TuaSach }}</h5></a>
+                    <a href="{{ url_for('chitiet_Sach', ma_sach=p.MaSach) }}"><h5 class="text-dark">{{ p.TuaSach }}</h5></a>
                 </td>
                 <td class="text-center"> <h5>{{ "{:,.1f}".format(p.GiaBia) }} VNĐ</h5></td>
                 <td class="text-center">
                     <a href="javascript:;"
-                       onclick="addToCart({{ p.MaSach }}, '{{p.TuaSach}}', {{ p.GiaBia }})"><h5>Order Book</h5></a>
+                       onclick="themVaoGioHang({{ p.MaSach }}, '{{p.TuaSach}}', {{ p.GiaBia }})"><h5>Mua</h5></a>
                 </td>
             </tr>
             {% endfor %}

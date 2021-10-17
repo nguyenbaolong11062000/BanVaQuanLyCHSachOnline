@@ -3,7 +3,7 @@
 
 {% block body %}
     {% if current_user.is_authenticated %}
-    <h1 class="text-danger">WELCOME TO LT BOOKSTORE OU, {{ current_user.Ten }}</h1>
+    <h1 class="text-danger">CHÀO MỪNG ĐẾN VỚI NHÀ SÁCH LT, {{ current_user.Ten }}</h1>
     {% else %}
     {% include 'admin/login.html' %}
     {% endif %}

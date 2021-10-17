@@ -41,7 +41,7 @@ CREATE TABLE `chitietdonhang` (
 
 LOCK TABLES `chitietdonhang` WRITE;
 /*!40000 ALTER TABLE `chitietdonhang` DISABLE KEYS */;
-INSERT INTO `chitietdonhang` VALUES (1,1,1,119500,0),(1,2,1,115000,0),(1,3,3,92600,0),(2,1,3,119500,0),(2,2,3,115000,0),(2,3,3,92600,0),(2,4,3,92650,0),(3,1,2,119500,0),(3,2,2,115000,0),(4,1,4,119500,0);
+INSERT INTO `chitietdonhang` VALUES (1,1,1,119500,0),(1,2,1,115000,0),(1,3,3,92600,0),(2,1,3,119500,0),(2,2,3,115000,0),(2,3,3,92600,0),(2,4,3,92650,0),(3,1,2,119500,0),(3,2,2,115000,0),(4,1,4,119500,0),(5,1,1,119500,0),(5,2,1,115000,0),(6,1,2,119500,0),(6,2,2,115000,0),(6,3,2,92600,0),(6,4,2,92650,0),(7,1,1,119500,0),(7,2,1,115000,0),(7,3,1,92600,0),(8,2,1,115000,0),(9,1,1,119500,0),(9,2,5,115000,0),(10,1,1,119500,0),(10,2,1,115000,0),(10,3,1,92600,0),(10,4,3,92650,0),(11,1,2,119500,0),(11,2,4,115000,0),(11,3,2,92600,0),(11,4,2,92650,0),(12,1,5,119500,0),(13,1,2,119500,0),(13,2,2,115000,0),(13,3,2,92600,0),(13,4,2,92650,0),(14,1,1,119500,0),(15,2,1,115000,0),(15,3,1,92600,0),(16,1,2,119500,0),(16,2,3,115000,0),(16,3,3,92600,0),(16,4,2,92650,0),(17,1,3,119500,0),(17,2,2,115000,0),(17,3,3,92600,0),(17,4,1,92650,0),(18,1,2,119500,0),(18,2,3,115000,0),(18,3,3,92600,0),(18,4,2,92650,0),(19,1,1,119500,0),(19,2,1,115000,0),(19,3,2,92600,0),(19,4,1,92650,0),(20,1,1,119500,0),(20,2,2,115000,0),(20,3,2,92600,0),(20,4,1,92650,0),(21,1,1,119500,0),(21,2,2,115000,0),(22,1,1,119500,0),(22,2,3,115000,0),(22,3,2,92600,0),(22,4,1,92650,0),(23,1,3,119500,0),(23,2,1,115000,0),(23,3,1,92600,0),(23,4,1,92650,0),(24,1,3,119500,0),(24,2,2,115000,0),(25,1,2,119500,0),(25,2,2,115000,0),(25,3,2,92600,0),(25,4,2,92650,0),(26,2,2,115000,0),(26,3,2,92600,0),(26,4,2,92650,0),(27,1,2,119500,0),(27,2,2,115000,0);
 /*!40000 ALTER TABLE `chitietdonhang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,7 +59,7 @@ CREATE TABLE `donhang` (
   PRIMARY KEY (`MaDH`),
   KEY `ma_kh` (`ma_kh`),
   CONSTRAINT `donhang_ibfk_1` FOREIGN KEY (`ma_kh`) REFERENCES `khachhang` (`MaKH`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +68,7 @@ CREATE TABLE `donhang` (
 
 LOCK TABLES `donhang` WRITE;
 /*!40000 ALTER TABLE `donhang` DISABLE KEYS */;
-INSERT INTO `donhang` VALUES (1,'2021-09-23 19:11:47',2),(2,'2021-09-23 19:40:48',2),(3,'2021-10-05 12:20:30',2),(4,'2021-10-05 12:33:24',2);
+INSERT INTO `donhang` VALUES (1,'2021-09-23 19:11:47',2),(2,'2021-09-23 19:40:48',2),(3,'2021-10-05 12:20:30',2),(4,'2021-10-05 12:33:24',2),(5,'2021-10-10 11:42:50',2),(6,'2021-10-10 14:38:07',6),(7,'2021-10-10 15:17:23',6),(8,'2021-10-10 15:29:01',2),(9,'2021-10-10 16:50:10',3),(10,'2021-10-16 13:58:41',2),(11,'2021-10-16 14:10:09',6),(12,'2021-10-16 14:10:43',6),(13,'2021-10-16 14:12:19',6),(14,'2021-10-16 14:18:57',2),(15,'2021-10-16 14:21:07',2),(16,'2021-10-16 14:39:18',6),(17,'2021-10-17 14:35:52',2),(18,'2021-10-17 14:37:14',3),(19,'2021-10-17 14:41:47',6),(20,'2021-10-17 14:50:23',2),(21,'2021-10-17 14:51:09',2),(22,'2021-10-17 14:54:53',2),(23,'2021-10-17 15:01:14',2),(24,'2021-10-17 15:05:23',2),(25,'2021-10-17 15:20:02',2),(26,'2021-10-17 15:29:14',2),(27,'2021-10-17 15:32:23',2);
 /*!40000 ALTER TABLE `donhang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,7 +94,7 @@ CREATE TABLE `khachhang` (
   PRIMARY KEY (`MaKH`),
   UNIQUE KEY `TenDangNhap` (`TenDangNhap`),
   CONSTRAINT `khachhang_chk_1` CHECK ((`HoatDonng` in (0,1)))
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +103,7 @@ CREATE TABLE `khachhang` (
 
 LOCK TABLES `khachhang` WRITE;
 /*!40000 ALTER TABLE `khachhang` DISABLE KEYS */;
-INSERT INTO `khachhang` VALUES (1,NULL,'ADMIN1','admin1@ou.edu.vn','admin1','e10adc3949ba59abbe56e057f20f883e','male',NULL,'0937752035',NULL,'ADMIN'),(2,'Nguyễn','Bảo Long','1851050083long@ou.edu.vn','user2','e10adc3949ba59abbe56e057f20f883e','male','images/upload/iphone11.png','0937752035',1,'KH');
+INSERT INTO `khachhang` VALUES (1,NULL,'ADMIN1','admin1@ou.edu.vn','admin1','e10adc3949ba59abbe56e057f20f883e','male',NULL,'0937752035',NULL,'ADMIN'),(2,'Nguyễn','Bảo Long','1851050083long@ou.edu.vn','user2','e10adc3949ba59abbe56e057f20f883e','male','images/upload/iphone11.png','0937752035',1,'KH'),(3,'Nguyễn','Bảo Hoàng','nguyenthanhloc168@gmail.com','user1','e10adc3949ba59abbe56e057f20f883e','male','images/upload/nhi.png','0937752035',1,'KH'),(4,'Bùi','Tiến Dũng','nhi@ou.edu.vn','dung123','e10adc3949ba59abbe56e057f20f883e','male','images/upload/iphone11.png','0933861286',1,'KH'),(5,'Lê','Xuân Long','long@ou.edu.vn','long123','e10adc3949ba59abbe56e057f20f883e','male','images/upload/monkey.jpg','0123456789',1,'KH'),(6,'Bùi','Thúy An','an@ou.edu.vn','an123','e35cf7b66449df565f93c607d5a81d09','femal','images/upload/nhi.png','0145678922',1,'KH');
 /*!40000 ALTER TABLE `khachhang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -225,4 +225,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-05 13:35:39
+-- Dump completed on 2021-10-17 15:34:59

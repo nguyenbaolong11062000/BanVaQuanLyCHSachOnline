@@ -1,26 +1,24 @@
-function addToCart(id, name, price) {
+function themVaoGioHang(STT, Ten, Gia) {
     fetch('/api/cart', {
         method: "post",
         body: JSON.stringify({
-            "id": id,
-            "name": name,
-            "price": price
+            "STT": STT,
+            "Ten": Ten,
+            "Gia": Gia
         }),
         headers: {
             'Content-Type': 'application/json'
         }
     }).then(res => res.json()).then(data => {
         console.info(data);
-        var cart = document.getElementById("cart-info");
-        cart.innerText = `${data.total_quantity} - ${data.total_amount} VNĐ`;
+        var cart = document.getElementById("thongTinGioHang");
+        cart.innerText = `${data.tongSoLuong} - ${data.tongTien} VNĐ`;
     }).catch(err => {
         console.log(err);
     })
-
-    // promise --> await/async
 }
 
-function pay() {
+function ghiNhanThanhToan() {
     if(confirm("Bạn có chắc chắn thanh toán?")){
         fetch('/api/pay', {
         method: "post",
@@ -38,8 +36,8 @@ function pay() {
 
 
 //hàm để xóa sản phẩm
-function del_book_in_cart(item_id) {
-    if(confirm("Bạn có chắc xóa sản phẩm này không?")) {
+function xoaSanPhamTrongGioHang(item_id) {
+    if(confirm("Bạn có chắc xóa sản phẩm này không? Nếu có hãy nhấn OK và sau đó nhấn F5 để hệ thống cập nhật!")) {
         fetch(`/api/cart/${item_id}`, {
             'method': 'delete',
             'headers': {
@@ -56,11 +54,11 @@ function del_book_in_cart(item_id) {
         }
     }
 //hàm để cập nhật tổng số lượng và tổng tiền khi thay đổi trên thanh số lượng ở trang hóa đơn thanh toán
-function update_book(obj, item_id) {
+function capNhatSanPhamTrongGioHang(obj, item_id) {
     fetch(`/api/cart/${item_id}`, {
         'method': "post",
         'body': JSON.stringify({
-            'quantity': obj.value
+            'soLuong': obj.value
         }),
         'headers': {
             'Content-Type': 'application/json'
@@ -69,8 +67,8 @@ function update_book(obj, item_id) {
             if(data.code != 200)
                 alert('Cập nhật thất bại!')
             else{
-                document.getElementById('total_quantity').innerText = data.total_quantity; //dùng phương thức "innerText" để lấy giá trị Text trong thẻ span
-                document.getElementById('total_amount').innerText = data.total_amount;
+                document.getElementById('tongSoLuong').innerText = data.tongSoLuong; //dùng phương thức "innerText" để gán giá trị Text cho thẻ span
+                document.getElementById('tongTien').innerText = data.tongTien;
             }
         }).catch(err => console.log('Cập nhật thất bại!'));
 }

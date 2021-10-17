@@ -2,10 +2,10 @@
         <div class="main-menu">
             <div class="container">
                 {% if current_user.is_authenticated %}
-                <div class="welcome">Welcome To BookStore :{{ current_user.Ho }} {{ current_user.Ten }} </div>
+                <div class="welcome">Chào mừng bạn đến với nhà sách : {{ current_user.Ho }} {{ current_user.Ten }} </div>
                 {% endif %}
                 <nav class="navbar navbar-expand-lg navbar-light">
-                    <h1 class="text-success">LT BOOKSTORE</h1>
+                    <h1 class="text-success">NHÀ SÁCH LT</h1>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon" ></span>
                     </button>
@@ -13,28 +13,25 @@
                         </ul>
                         <ul class="navbar-nav ml-auto">
                             <li class="navbar-item active">
-                                <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                                <a href="{{ url_for('trangChu') }}" class="nav-link">Trang Chủ</a>
                             </li>
                             <li class="navbar-item">
-                                <a href="{{ url_for('book_list') }}" class="nav-link">Search</a>
+                                <a href="{{ url_for('danhsach_Sach') }}" class="nav-link">Tìm Kiếm</a>
                             </li>
                             <li class="navbar-item">
-                                <a href="{{ url_for('about_us') }}" class="nav-link">About Us</a>
-                            </li>
-                            <li class="navbar-item">
-                                <a href="{{ url_for('pri_policy') }}" class="nav-link">Privacy</a>
+                                <a href="{{ url_for('gioiThieu') }}" class="nav-link">Giới thiệu</a>
                             </li>
                             {% if current_user.is_authenticated %}
                                 <li class="navbar-item">
-                                    <a href="{{ url_for('logout_usr') }}" class="nav-link">Logout</a>
+                                    <a href="{{ url_for('dangXuat') }}" class="nav-link">Đăng xuất</a>
                                 </li>
                             {% else %}
                                 <li class="navbar-item">
-                                    <a href="{{ url_for('login_usr') }}" class="nav-link">Login</a>
+                                    <a href="{{ url_for('dangNhap') }}" class="nav-link">Đăng nhập</a>
                                 </li>
                             {% endif %}
                              <li class="navbar-item">
-	                                <a href="{{ url_for('registerCustomer') }}" class="nav-link">Signup</a>
+	                                <a href="{{ url_for('dangKyKhachHang') }}" class="nav-link">Đăng ký</a>
                              </li>
                         </ul>
                     </div>

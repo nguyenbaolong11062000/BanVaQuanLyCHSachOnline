@@ -4,41 +4,41 @@ from nha_sach import db
 from flask_login import current_user
 
 #các chức năng tìm kiếm
-def read_books(book_id=None, kw=None, kw2=None, from_price=None, to_price=None):
-    books = Sach.query.join((TacGiaVietSach, Sach.MaSach == TacGiaVietSach.ma_sach), (TacGia, TacGia.MaTG == TacGiaVietSach.ma_tg))
-    if book_id:
-        books = books.filter(Sach.MaSach == book_id)
-    if kw:
-        books = books.filter(Sach.TuaSach.contains(kw))
-    if kw2:
-        books = books.filter(TacGia.Ten.contains(kw2))
-    if from_price and to_price:
-        books = books.filter(Sach.GiaBia.__gt__(from_price),
-                             Sach.GiaBia.__lt__(to_price))
+def timKiem_Sach(ma_sach=None, ten_sach=None, tac_gia=None, gia_batDau=None, gia_ketThuc=None):
+    sach = Sach.query.join((TacGiaVietSach, Sach.MaSach == TacGiaVietSach.ma_sach), (TacGia, TacGia.MaTG == TacGiaVietSach.ma_tg))
+    if ma_sach:
+        sach = sach.filter(Sach.MaSach == ma_sach)
+    if ten_sach:
+        sach = sach.filter(Sach.TuaSach.contains(ten_sach))
+    if tac_gia:
+        sach = sach.filter(TacGia.Ten.contains(tac_gia))
+    if gia_batDau and gia_ketThuc:
+        sach = sach.filter(Sach.GiaBia.__gt__(gia_batDau),
+                             Sach.GiaBia.__lt__(gia_ketThuc))
 
-    return books.all()
+    return sach.all()
 
 #chức năng chi tiết sách
-def get_book_by_id(book_id):
-    return Sach.query.get(book_id)
+def thongtinSach_theoMaSach(ma_sach):
+    return Sach.query.get(ma_sach)
 
 
 #kiểm tra đăng nhập admin
-def check_login(username, password, role = UserRole.ADMIN):
-    password = str(hashlib.md5(password.strip().encode('utf-8')).hexdigest())
+def kiemTraDangNhapADMIN(TenDangNhap, MatKhau, VaiTro=UserRole.ADMIN):
+    matKhau = str(hashlib.md5(MatKhau.strip().encode('utf-8')).hexdigest())
 
-    user = KhachHang.query.filter(KhachHang.TenDangNhap == username.strip(),
-                             KhachHang.MatKhau == password,
-                             KhachHang.VaiTro == role).first()
-    return user
+    nguoidung_ADMIN = KhachHang.query.filter(KhachHang.TenDangNhap == TenDangNhap.strip(),
+                             KhachHang.MatKhau == matKhau,
+                             KhachHang.VaiTro == VaiTro).first()
+    return nguoidung_ADMIN
 
 
 #đăng ký khách hàng
-def add_user(name1, name, phone, email, username, password, gender, avatar_path):
-    password = str(hashlib.md5(password.strip().encode('utf-8')).hexdigest())
-    u = KhachHang(Ho=name1,Ten=name, Email=email, SoDT=phone,
-                  TenDangNhap=username, MatKhau=password, GioiTinh=gender,
-                  HinhAnh=avatar_path)
+def themKhachHang(Ho, Ten, SoDT, Email, TenDangNhap, MatKhau, GioiTinh, HinhAnh):
+    MatKhau = str(hashlib.md5(MatKhau.strip().encode('utf-8')).hexdigest())
+    u = KhachHang(Ho=Ho, Ten=Ten, Email=Email, SoDT=SoDT,
+                  TenDangNhap=TenDangNhap, MatKhau=MatKhau, GioiTinh=GioiTinh,
+                  HinhAnh=HinhAnh)
     try:
         db.session.add(u)
         db.session.commit()
@@ -48,30 +48,31 @@ def add_user(name1, name, phone, email, username, password, gender, avatar_path)
         return False
 
 #duyệt user để đăng nhập
-def get_user_by_id(user_id):
-   return KhachHang.query.get(user_id)
+def duyet_taiKhoan(ma_KH):
+   return KhachHang.query.get(ma_KH)
 
-#thông tin hóa đơn
-def cart_stats(cart):
-    total_quantity, total_amount = 0, 0
+#thông tin tổng tiền và tổng số lượng (cách tính)
+def tinhTongTien_SoLuong(cart):
+    tong_SoLuong, tong_Tien = 0, 0
     if cart:
         for p in cart.values():
-            total_quantity = total_quantity + p["quantity"]
-            total_amount = total_amount + p["quantity"] * p["price"]
+            tong_SoLuong = tong_SoLuong + p["soLuong"]
+            tong_Tien = tong_Tien + p["soLuong"] * p["Gia"]
 
-    return total_quantity, total_amount
+    return tong_SoLuong, tong_Tien
+
 
 #ghi nhận hóa đơn xuống CSDL
-def add_receipt(cart):
+def ghiNhanHoaDon(cart):
     if cart and current_user.is_authenticated:
         receipt = DonHang(ma_kh=current_user.MaKH)
         db.session.add(receipt)
 
         for p in list(cart.values()):
             detail = ChiTietDonHang(DonHang=receipt,
-                                   ma_sach=int(p["id"]),
-                                   SoLuong=p["quantity"],
-                                   GiaBan=p["price"])
+                                   ma_sach=int(p["STT"]), #p["?"] được là do trong giỏ hàng đã định nghĩa STT, soLuong, Gia rồi
+                                   SoLuong=p["soLuong"], #nên khi gọi phương cart.values() sẽ gọi được các biến đó
+                                   GiaBan=p["Gia"])
             db.session.add(detail)
 
         try:
