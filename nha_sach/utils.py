@@ -52,10 +52,10 @@ def duyet_taiKhoan(ma_KH):
    return KhachHang.query.get(ma_KH)
 
 #thông tin tổng tiền và tổng số lượng (cách tính)
-def tinhTongTien_SoLuong(cart):
+def tinhTongTien_SoLuong(gioHang):
     tong_SoLuong, tong_Tien = 0, 0
-    if cart:
-        for p in cart.values():
+    if gioHang:
+        for p in gioHang.values():
             tong_SoLuong = tong_SoLuong + p["soLuong"]
             tong_Tien = tong_Tien + p["soLuong"] * p["Gia"]
 
@@ -63,17 +63,17 @@ def tinhTongTien_SoLuong(cart):
 
 
 #ghi nhận hóa đơn xuống CSDL
-def ghiNhanHoaDon(cart):
-    if cart and current_user.is_authenticated:
-        receipt = DonHang(ma_kh=current_user.MaKH)
-        db.session.add(receipt)
+def ghiNhanHoaDon(gioHang):
+    if gioHang and current_user.is_authenticated:
+        hoaDon = DonHang(ma_kh=current_user.MaKH)
+        db.session.add(hoaDon)
 
-        for p in list(cart.values()):
-            detail = ChiTietDonHang(DonHang=receipt,
+        for p in list(gioHang.values()):
+            chiTietHoaDon = ChiTietDonHang(DonHang=hoaDon,
                                    ma_sach=int(p["STT"]), #p["?"] được là do trong giỏ hàng đã định nghĩa STT, soLuong, Gia rồi
                                    SoLuong=p["soLuong"], #nên khi gọi phương cart.values() sẽ gọi được các biến đó
                                    GiaBan=p["Gia"])
-            db.session.add(detail)
+            db.session.add(chiTietHoaDon)
 
         try:
             db.session.commit()

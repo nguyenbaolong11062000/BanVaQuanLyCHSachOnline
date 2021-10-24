@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AboutUs</title>
+    <title>Giới Thiệu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#03a6f3">
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
@@ -14,16 +14,45 @@
 <body>
     <section class="about-sec">
         <div class="about-img">
+            <figure style="background-image: url('../static/images/daiHocMo3.png');"></figure>
+        </div>
+        <div class="about-content">
+            <h2 class="text-center">TRƯỜNG ĐẠI HỌC MỞ THÀNH PHỐ HỒ CHÍ MINH</h2>
+            <p><h4 class="text-center">KHOA CÔNG NGHỆ THÔNG TIN, KHÓA 2018</h4></p>
+            <h5 class="text-center">THÔNG TIN SINH VIÊN LÀM ĐỒ ÁN NGÀNH HK3 2021</h5>
+        </div>
+    </section>
+    <section class="about-sec">
+        <div class="about-img">
+            <figure style="background-image: url('../static/images/baoLong.png');"></figure>
+        </div>
+        <div class="about-content">
+            <p><h2>Họ và tên: Nguyễn Bảo Long</h2></p>
+            <p><h2>MSSV: 1851050083</h2></p>
+            <p><h2>Lớp: DH18IT01</h2></p>
+            <p><h2>Ngành: Công nghệ thông tin</h2></p>
+            <p><h2>Khoa: Công nghệ thông tin</h2></p>
+            <div class="btn-sec">
+                <a href="{{ url_for('danhsach_Sach') }}" class="btn yellow">trang web</a>
+                <a href="{{ url_for('dangKyKhachHang') }}" class="btn black">đăng ký</a>
+                <a href="{{ url_for('trangChu') }}" class="btn yellow">trang chủ</a>
+            </div>
+        </div>
+    </section>
+    <section class="about-sec">
+        <div class="about-img">
             <figure style="background-image: url('../static/images/about-img.jpg');"></figure>
         </div>
         <div class="about-content">
-            <h2>About bookstore,</h2>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's printer took a galley of type and Scrambled it to make a type and typesetting industry. Lorem Ipsum has been the book. </p>
-            <p>It has survived not only fiveLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's printer took a galley of type and</p>
+            <p><h2>Họ và tên: Mai Xuân Thọ</h2></p>
+            <p><h2>MSSV: 1851050136</h2></p>
+            <p><h2>Lớp: DH18IT01</h2></p>
+            <p><h2>Ngành: Công nghệ thông tin</h2></p>
+            <p><h2>Khoa: Công nghệ thông tin</h2></p>
             <div class="btn-sec">
-                <a href="{{ url_for('book_list') }}" class="btn yellow">shop books</a>
-                <a href="{{ url_for('registerCustomer') }}" class="btn black">subscriptions</a>
-                <a href="{{ url_for('trangChu') }}" class="btn yellow">back</a>
+                <a href="{{ url_for('danhsach_Sach') }}" class="btn yellow">trang web</a>
+                <a href="{{ url_for('dangKyKhachHang') }}" class="btn black">đăng ký</a>
+                <a href="{{ url_for('trangChu') }}" class="btn yellow">trang chủ</a>
             </div>
         </div>
     </section>

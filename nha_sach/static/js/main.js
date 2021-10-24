@@ -1,5 +1,5 @@
 function themVaoGioHang(STT, Ten, Gia) {
-    fetch('/api/cart', {
+    fetch('/api/gioHang', {
         method: "post",
         body: JSON.stringify({
             "STT": STT,
@@ -11,8 +11,7 @@ function themVaoGioHang(STT, Ten, Gia) {
         }
     }).then(res => res.json()).then(data => {
         console.info(data);
-        var cart = document.getElementById("thongTinGioHang");
-        cart.innerText = `${data.tongSoLuong} - ${data.tongTien} VNĐ`;
+        document.getElementById("thongTinGioHang").innerText = `${data.tongSoLuong} - ${data.tongTien} VNĐ`;
     }).catch(err => {
         console.log(err);
     })
@@ -20,13 +19,13 @@ function themVaoGioHang(STT, Ten, Gia) {
 
 function ghiNhanThanhToan() {
     if(confirm("Bạn có chắc chắn thanh toán?")){
-        fetch('/api/pay', {
+        fetch('/api/thanhToan', {
         method: "post",
         headers: {
             'Content-Type': 'application/json'
         }
         }).then(res => res.json()).then(data => {
-            alert(data.message);
+            alert(data.thongBao);
             location.reload();
         }).catch(err => {
             location.href = '/admin?next=/payment';
@@ -36,16 +35,16 @@ function ghiNhanThanhToan() {
 
 
 //hàm để xóa sản phẩm
-function xoaSanPhamTrongGioHang(item_id) {
+function xoaSanPhamTrongGioHang(ma_sanPham) {
     if(confirm("Bạn có chắc xóa sản phẩm này không? Nếu có hãy nhấn OK và sau đó nhấn F5 để hệ thống cập nhật!")) {
-        fetch(`/api/cart/${item_id}`, {
+        fetch(`/api/gioHang/${ma_sanPham}`, {
             'method': 'delete',
             'headers': {
                 'Content-Type': 'application/json'
             }
         }).then(res => res.json()).then(data => {
             if(data.code == 200){
-                var x = document.getElementById(`item${data.item_id}`);
+                var x = document.getElementById(`item${data.ma_sanPham}`);
                 x.style.display = 'none';
             } else {
                 alert('Xóa thất bại!');
@@ -54,8 +53,8 @@ function xoaSanPhamTrongGioHang(item_id) {
         }
     }
 //hàm để cập nhật tổng số lượng và tổng tiền khi thay đổi trên thanh số lượng ở trang hóa đơn thanh toán
-function capNhatSanPhamTrongGioHang(obj, item_id) {
-    fetch(`/api/cart/${item_id}`, {
+function capNhatSanPhamTrongGioHang(obj, ma_sanPham) {
+    fetch(`/api/gioHang/${ma_sanPham}`, {
         'method': "post",
         'body': JSON.stringify({
             'soLuong': obj.value

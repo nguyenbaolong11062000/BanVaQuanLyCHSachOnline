@@ -14,7 +14,7 @@ def trangChu():
     return render_template('index.html')
 
 
-@app.route('/about-us')
+@app.route('/gioi-thieu')
 def gioiThieu():
    return render_template('about-us.html')
 
@@ -120,31 +120,31 @@ def xet_taiKhoan(ma_KH):
     return utils.duyet_taiKhoan(ma_KH=ma_KH)
 
 #thêm sách vào giỏ hàng
-@app.route('/api/cart', methods=['post'])
+@app.route('/api/gioHang', methods=['post'])
 def them_vao_gio_hang():
-    if 'cart' not in session:
-        session['cart'] = {}
+    if 'gioHang' not in session:
+        session['gioHang'] = {}
 
-    cart = session['cart']
+    gioHang = session['gioHang']
 
-    data = json.loads(request.data)
-    STT = str(data.get("STT"))
-    Ten = data.get("Ten")
-    Gia = data.get("Gia")
+    duLieu = json.loads(request.data)
+    STT = str(duLieu.get("STT"))
+    Ten = duLieu.get("Ten")
+    Gia = duLieu.get("Gia")
 
-    if STT in cart:
-        cart[STT]["soLuong"] = cart[STT]["soLuong"] + 1
+    if STT in gioHang:
+        gioHang[STT]["soLuong"] = gioHang[STT]["soLuong"] + 1
     else:
-        cart[STT] = {
+        gioHang[STT] = {
             "STT": STT,
             "Ten": Ten,
             "Gia": Gia,
             "soLuong": 1
         }
 
-    session['cart'] = cart
+    session['gioHang'] = gioHang
 
-    tongSoLuong, tongTien = utils.tinhTongTien_SoLuong(cart)
+    tongSoLuong, tongTien = utils.tinhTongTien_SoLuong(gioHang)
 
     return jsonify({
         "tongSoLuong": tongSoLuong,
@@ -155,42 +155,42 @@ def them_vao_gio_hang():
 @app.route('/payment')
 @decorator.login_required
 def chuyenSang_thanhToan():
-    tongSoLuong, tongTien = utils.tinhTongTien_SoLuong(session.get('cart'))
+    tongSoLuong, tongTien = utils.tinhTongTien_SoLuong(session.get('gioHang'))
     return render_template('payment.html',
                            tongSoLuong=tongSoLuong, tongTien=tongTien)
 
 #ghi nhận thanh toán
-@app.route('/api/pay', methods=['post'])
+@app.route('/api/thanhToan', methods=['post'])
 def ghiNhan_thanhToan():
-    if utils.ghiNhanHoaDon(session.get('cart')):
-        del session['cart']
-        return jsonify({'message': 'Ghi nhận phiếu mua hàng thành công!'})
+    if utils.ghiNhanHoaDon(session.get('gioHang')):
+        del session['gioHang']
+        return jsonify({'thongBao': 'Ghi nhận phiếu mua hàng thành công!'})
 
-    return jsonify({'message': 'Lỗi!'})
+    return jsonify({'thongBao': 'Lỗi!'})
 
 #xóa một sản phẩm trong giỏ hàng
-@app.route('/api/cart/<item_id>', methods=['delete'])
-def xoaSanPham_trongGioHang(item_id):
-    if 'cart' in session:
-        cart = session['cart']
-        if item_id in cart:
-            del cart[item_id]
-            session['cart'] = cart
+@app.route('/api/gioHang/<ma_sanPham>', methods=['delete'])
+def xoaSanPham_trongGioHang(ma_sanPham):
+    if 'gioHang' in session:
+        gioHang = session['gioHang']
+        if ma_sanPham in gioHang:
+            del gioHang[ma_sanPham]
+            session['gioHang'] = gioHang
 
-            return jsonify({'err_msg': 'Xóa thành công!', 'code': 200, 'item_id': item_id})
+            return jsonify({'err_msg': 'Xóa thành công!', 'code': 200, 'ma_sanPham': ma_sanPham})
         return jsonify({'err_msg': 'Xóa không thành công!', 'code': 500})
 
 
 #cập nhật thông tin sản phẩm trong giỏ hàng
-@app.route('/api/cart/<item_id>', methods=['post'])
-def capNhatSanPham_trongGioHang(item_id):
-    if 'cart' in session:
-        cart = session['cart']
-        data = request.json
-        if item_id in cart and 'soLuong' in data:
-            cart[item_id]['soLuong'] = int(data['soLuong'])
-            session['cart'] = cart
-            tongSoLuong, tongTien = utils.tinhTongTien_SoLuong(session.get('cart'))
+@app.route('/api/gioHang/<ma_sanPham>', methods=['post'])
+def capNhatSanPham_trongGioHang(ma_sanPham):
+    if 'gioHang' in session:
+        gioHang = session['gioHang']
+        duLieu = request.json
+        if ma_sanPham in gioHang and 'soLuong' in duLieu:
+            gioHang[ma_sanPham]['soLuong'] = int(duLieu['soLuong'])
+            session['gioHang'] = gioHang
+            tongSoLuong, tongTien = utils.tinhTongTien_SoLuong(session.get('gioHang'))
 
 
             return jsonify({'err_msg': 'Cập nhật thành công!',

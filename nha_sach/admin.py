@@ -1,6 +1,6 @@
 from flask_login import logout_user, current_user
 from flask import redirect
-from nha_sach import admin, db
+from nha_sach import admin
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import BaseView, expose
 from nha_sach.models import *

@@ -30,8 +30,8 @@
                         <th class="text-center"></th>
                     </tr>
                 </thead>
-                {% if 'cart' in session %}
-                {% for p in session['cart'].values() %} <!-- p. được là do trong giỏ hàng đã định nghĩa STT, Ten, Gia rồi -->
+                {% if 'gioHang' in session %}
+                {% for p in session['gioHang'].values() %} <!-- p. được là do trong giỏ hàng đã định nghĩa STT, Ten, Gia rồi -->
                 <tr id="item{{ p.STT }}">
                     <td class="text-center">{{ p.STT }}</td>
                     <td class="text-center">{{ p.Ten }}</td>
