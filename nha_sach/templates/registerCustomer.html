@@ -4,11 +4,6 @@
 		<meta charset="utf-8">
 		<title>Đăng Ký</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-		<!-- MATERIAL DESIGN ICONIC FONT -->
-		<link rel="stylesheet" href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
-
-		<!-- STYLE CSS -->
 		<link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
 		<link rel="stylesheet" href="../static/css/style.css">
 	</head>
@@ -22,9 +17,9 @@
 				</div>
 				<form method="post" action="" enctype="multipart/form-data">
 					<h3>ĐĂNG KÝ</h3>
-					{% if err_msg %}
+					{% if thong_bao %}
 					<div class="alert alert-warning">
-						{{ err_msg }}
+						{{ thong_bao }}
 					</div>
 					{% endif %}
 					<div class="form-group">

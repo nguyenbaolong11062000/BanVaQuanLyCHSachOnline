@@ -27,7 +27,8 @@ def danhsach_Sach():
     tac_gia = request.args.get('tac_gia')
     gia_batDau = request.args.get('gia_batDau')
     gia_ketThuc = request.args.get('gia_ketThuc')
-    sach = utils.timKiem_Sach(ma_sach=ma_sach, ten_sach=ten_sach, tac_gia=tac_gia, gia_batDau=gia_batDau, gia_ketThuc=gia_ketThuc)
+    sach = utils.timKiem_Sach(ma_sach=ma_sach, ten_sach=ten_sach,
+                              tac_gia=tac_gia, gia_batDau=gia_batDau, gia_ketThuc=gia_ketThuc)
     return render_template('book-list.html',
                            sach=sach, ma_sach=ma_sach)
 
@@ -58,7 +59,7 @@ def dangNhap():
             else:
                 return redirect(url_for("trangChu"))
         else:
-            thong_bao = "Đăng nhập không thành công!"
+            thong_bao = "Sai tên đăng nhập hoặc mật khẩu. Vui lòng đăng nhập lại!"
 
 
     return render_template("login_user.html", thong_bao=thong_bao)
@@ -109,7 +110,7 @@ def dangKyKhachHang():
             else:
                 thong_bao = "Hệ thống đang lỗi ... Vui lòng quay lại sau!"
         else:
-            thong_bao = "Mật khẩu sai!"
+            thong_bao = "Mật khẩu xác nhận không đúng!"
 
     return render_template('registerCustomer.html', thong_bao=thong_bao)
 
@@ -152,7 +153,7 @@ def them_vao_gio_hang():
     })
 
 #thanh toán giỏ hàng
-@app.route('/payment')
+@app.route('/phieuMuaHang')
 @decorator.login_required
 def chuyenSang_thanhToan():
     tongSoLuong, tongTien = utils.tinhTongTien_SoLuong(session.get('gioHang'))
@@ -166,7 +167,7 @@ def ghiNhan_thanhToan():
         del session['gioHang']
         return jsonify({'thongBao': 'Ghi nhận phiếu mua hàng thành công!'})
 
-    return jsonify({'thongBao': 'Lỗi!'})
+    return jsonify({'thongBao': 'Không có sản phẩm để thanh toán! Vui lòng quay lại chọn sản phẩm'})
 
 #xóa một sản phẩm trong giỏ hàng
 @app.route('/api/gioHang/<ma_sanPham>', methods=['delete'])
@@ -176,9 +177,14 @@ def xoaSanPham_trongGioHang(ma_sanPham):
         if ma_sanPham in gioHang:
             del gioHang[ma_sanPham]
             session['gioHang'] = gioHang
+            tongSoLuong, tongTien = utils.tinhTongTien_SoLuong(session.get('gioHang'))
 
-            return jsonify({'err_msg': 'Xóa thành công!', 'code': 200, 'ma_sanPham': ma_sanPham})
-        return jsonify({'err_msg': 'Xóa không thành công!', 'code': 500})
+
+            return jsonify({'code': 200,
+                            'ma_sanPham': ma_sanPham,
+                            'tongSoLuong': tongSoLuong,
+                            'tongTien': tongTien})
+        return jsonify({'code': 500})
 
 
 #cập nhật thông tin sản phẩm trong giỏ hàng
@@ -193,11 +199,10 @@ def capNhatSanPham_trongGioHang(ma_sanPham):
             tongSoLuong, tongTien = utils.tinhTongTien_SoLuong(session.get('gioHang'))
 
 
-            return jsonify({'err_msg': 'Cập nhật thành công!',
-                            'code': 200,
+            return jsonify({'code': 200,
                             'tongSoLuong': tongSoLuong,
                             'tongTien': tongTien})
-    return jsonify({'err_msg': 'Cập nhật không thành công!', 'code': 500})
+    return jsonify({'code': 500})
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -19,19 +19,19 @@
                                 <a href="{{ url_for('danhsach_Sach') }}" class="nav-link">Tìm Kiếm</a>
                             </li>
                             <li class="navbar-item">
-                                <a href="{{ url_for('gioiThieu') }}" class="nav-link">Giới thiệu</a>
+                                <a href="{{ url_for('gioiThieu') }}" class="nav-link">Giới Thiệu</a>
                             </li>
                             {% if current_user.is_authenticated %}
                                 <li class="navbar-item">
-                                    <a href="{{ url_for('dangXuat') }}" class="nav-link">Đăng xuất</a>
+                                    <a href="{{ url_for('dangXuat') }}" class="nav-link">Đăng Xuất</a>
                                 </li>
                             {% else %}
                                 <li class="navbar-item">
-                                    <a href="{{ url_for('dangNhap') }}" class="nav-link">Đăng nhập</a>
+                                    <a href="{{ url_for('dangNhap') }}" class="nav-link">Đăng Nhập</a>
                                 </li>
                             {% endif %}
                              <li class="navbar-item">
-	                                <a href="{{ url_for('dangKyKhachHang') }}" class="nav-link">Đăng ký</a>
+	                                <a href="{{ url_for('dangKyKhachHang') }}" class="nav-link">Đăng Ký</a>
                              </li>
                         </ul>
                     </div>

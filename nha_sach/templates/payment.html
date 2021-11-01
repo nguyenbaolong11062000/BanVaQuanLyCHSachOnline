@@ -16,7 +16,7 @@
                 </div>
                 <div class="alert">
                     <h3>Tổng số lượng sản phẩm: <span id="tongSoLuong"> {{ tongSoLuong }} </span></h3>
-                    <h3>Tổng tiền:<span id="tongTien"> {{ "{:,.1f}".format(tongTien) }} </span> VNĐ </h3>
+                    <h3>Tổng tiền:<span id="tongTien"> {{ "{:,.0f}".format(tongTien) }} </span> VNĐ </h3>
                 </div>
             </div>
 
@@ -35,7 +35,7 @@
                 <tr id="item{{ p.STT }}">
                     <td class="text-center">{{ p.STT }}</td>
                     <td class="text-center">{{ p.Ten }}</td>
-                    <td class="text-center">{{ "{:,.1f}".format(p.Gia) }} VNĐ</td>
+                    <td class="text-center">{{ "{:,.0f}".format(p.Gia) }} VNĐ</td>
                     <td class="text-center">
                         <div class="form-group">
                             <input type="number"
@@ -60,7 +60,7 @@
                     value="Thanh Toán"
                     class="btn btn-danger" />
             <div class="btn btn-danger">
-                <a href="{{ url_for('danhsach_Sach') }}"><h5 class="text text-light">Quay Lại</h5></a>
+                <a href="{{ url_for('danhsach_Sach') }}"><h5 class="text text-light">Quay Lại Danh Mục Sách</h5></a>
             </div>
             </div>
         </div>

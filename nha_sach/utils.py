@@ -2,6 +2,7 @@ import hashlib
 from nha_sach.models import UserRole, Sach, KhachHang, DonHang, ChiTietDonHang, TacGiaVietSach, TacGia
 from nha_sach import db
 from flask_login import current_user
+from sqlalchemy import or_, and_
 
 #các chức năng tìm kiếm
 def timKiem_Sach(ma_sach=None, ten_sach=None, tac_gia=None, gia_batDau=None, gia_ketThuc=None):
@@ -11,7 +12,12 @@ def timKiem_Sach(ma_sach=None, ten_sach=None, tac_gia=None, gia_batDau=None, gia
     if ten_sach:
         sach = sach.filter(Sach.TuaSach.contains(ten_sach))
     if tac_gia:
-        sach = sach.filter(TacGia.Ten.contains(tac_gia))
+        sach = sach.filter(
+            or_(
+                TacGia.Ten.contains(tac_gia),
+                TacGia.Ho.contains(tac_gia)
+            )
+        )
     if gia_batDau and gia_ketThuc:
         sach = sach.filter(Sach.GiaBia.__gt__(gia_batDau),
                              Sach.GiaBia.__lt__(gia_ketThuc))

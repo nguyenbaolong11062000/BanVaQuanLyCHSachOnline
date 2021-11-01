@@ -7,7 +7,6 @@
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 	<img class="wave" src="../static/images/wave.png">
@@ -19,9 +18,9 @@
 			<form method="post" action="{{ url_for('dangNhap') }}">
 				<img src="../static/images/avatar.svg">
 				<h2 class="title">Đăng Nhập</h2>
-				{% if err_msg %}
+				{% if thong_bao %}
 				<div class="alert alert-warning">
-					{{ err_msg }}
+					{{ thong_bao }}
 				</div>
 				{% endif %}
            		<div class="input-div one">

@@ -20,12 +20,12 @@
                     <ul>
                         <li>{{ cuon_sach.MoTaSach }}</li>
                         <li>Tác giả:
-                            <a id="popup-author" onclick="hienThi()">
+                            <a id="popup-tacGia" onclick="hienThi()">
                                 {{ cuon_sach.tg_vietsach[0].TacGia.Ten }} {{ cuon_sach.tg_vietsach[0].TacGia.Ho }}
                             </a>
                         </li>
                         <li>Năm Xuất Bản: {{ cuon_sach.NamXuatBan }}</li>
-                        <li>Giá Tiền: {{ "{:,.1f}".format(cuon_sach.GiaBia) }} VNĐ</li>
+                        <li>Giá Tiền: {{ "{:,.0f}".format(cuon_sach.GiaBia) }} VNĐ</li>
 
                     </ul>
                     <div class="row">
@@ -34,7 +34,7 @@
                                onclick="themVaoGioHang({{ cuon_sach.MaSach }}, '{{cuon_sach.TuaSach}}', {{ cuon_sach.GiaBia }})"><h5>MUA</h5></a>
                         </div>
                         <div class="col-md-6">
-                            <a class="badge badge-primary" href=" {{ url_for('chuyenSang_thanhToan') }} " id="thongTinGioHang">
+                            <a class="btn btn-primary" href=" {{ url_for('chuyenSang_thanhToan') }} " id="thongTinGioHang">
                                 <i class="fa fa-shopping-cart"></i></a>
                         </div>
                     </div>

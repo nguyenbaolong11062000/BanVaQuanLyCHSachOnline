@@ -11,6 +11,7 @@
 <body style="background-image: url('../static/images/wave.png');">
     <div class="container">
         <h1 class="text-center text-danger">
+            <a href="{{ url_for('trangChu') }}"><i class="fa fa-home"></i></a>
             DANH MỤC SÁCH
             <a class="badge badge-primary" href=" {{ url_for('chuyenSang_thanhToan') }} " id="thongTinGioHang">
                   <i class="fa fa-shopping-cart"></i></a>
@@ -57,13 +58,15 @@
             {% for p in sach %}
             <tr>
                 <td class="text-center">
-                    <img width="120" src="{{ url_for('static', filename=p.HinhAnh) }}" alt="{{ p.TuaSach }}" />
+                    <a href="{{ url_for('chitiet_Sach', ma_sach=p.MaSach) }}">
+                        <img width="120" src="{{ url_for('static', filename=p.HinhAnh) }}" alt="{{ p.TuaSach }}" />
+                    </a>
                 </td>
                 <td class="text-center"> <h5>{{ p.MaSach }}</h5> </td>
                 <td class="text-center">
-                    <a href="{{ url_for('chitiet_Sach', ma_sach=p.MaSach) }}"><h5 class="text-dark">{{ p.TuaSach }}</h5></a>
+                    <h5 class="text-dark">{{ p.TuaSach }}</h5>
                 </td>
-                <td class="text-center"> <h5>{{ "{:,.1f}".format(p.GiaBia) }} VNĐ</h5></td>
+                <td class="text-center"> <h5>{{ "{:,.0f}".format(p.GiaBia) }} VNĐ</h5></td>
                 <td class="text-center">
                     <a href="javascript:;"
                        onclick="themVaoGioHang({{ p.MaSach }}, '{{p.TuaSach}}', {{ p.GiaBia }})"><h5>Mua</h5></a>

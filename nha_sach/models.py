@@ -87,7 +87,7 @@ class TacGia(db.Model):
     Ho = Column(String(50), nullable=True)
     Ten = Column(String(50), nullable=True)
     HinhAnh = Column(String(50))
-    TieuSu = Column(String(50))
+    TieuSu = Column(String(255))
     tg_vietsach = relationship('TacGiaVietSach', backref='TacGia', lazy=True)
 
     def __str__(self):
