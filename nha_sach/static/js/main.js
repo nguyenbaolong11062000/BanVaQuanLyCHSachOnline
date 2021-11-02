@@ -1,8 +1,8 @@
-function themVaoGioHang(STT, Ten, Gia) {
+function themVaoGioHang(Ma_Sach, Ten, Gia) {
     fetch('/api/gioHang', {
         method: "post",
         body: JSON.stringify({
-            "STT": STT,
+            "Ma_Sach": Ma_Sach,
             "Ten": Ten,
             "Gia": Gia
         }),

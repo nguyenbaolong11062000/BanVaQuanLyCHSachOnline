@@ -2,7 +2,7 @@ import hashlib
 from nha_sach.models import UserRole, Sach, KhachHang, DonHang, ChiTietDonHang, TacGiaVietSach, TacGia
 from nha_sach import db
 from flask_login import current_user
-from sqlalchemy import or_, and_
+from sqlalchemy import or_
 
 #các chức năng tìm kiếm
 def timKiem_Sach(ma_sach=None, ten_sach=None, tac_gia=None, gia_batDau=None, gia_ketThuc=None):
@@ -12,12 +12,10 @@ def timKiem_Sach(ma_sach=None, ten_sach=None, tac_gia=None, gia_batDau=None, gia
     if ten_sach:
         sach = sach.filter(Sach.TuaSach.contains(ten_sach))
     if tac_gia:
-        sach = sach.filter(
-            or_(
-                TacGia.Ten.contains(tac_gia),
-                TacGia.Ho.contains(tac_gia)
-            )
-        )
+        hoVaTenTG1 = TacGia.Ten + ' ' + TacGia.Ho
+        hoVaTenTG2 = TacGia.Ho + ' ' + TacGia.Ten
+        sach = sach.filter(or_(hoVaTenTG1.contains(tac_gia),
+                               hoVaTenTG2.contains(tac_gia)))
     if gia_batDau and gia_ketThuc:
         sach = sach.filter(Sach.GiaBia.__gt__(gia_batDau),
                              Sach.GiaBia.__lt__(gia_ketThuc))
@@ -76,7 +74,7 @@ def ghiNhanHoaDon(gioHang):
 
         for p in list(gioHang.values()):
             chiTietHoaDon = ChiTietDonHang(DonHang=hoaDon,
-                                   ma_sach=int(p["STT"]), #p["?"] được là do trong giỏ hàng đã định nghĩa STT, soLuong, Gia rồi
+                                   ma_sach=int(p["Ma_Sach"]), #p["?"] được là do trong giỏ hàng đã định nghĩa Ma_Sach, soLuong, Gia rồi
                                    SoLuong=p["soLuong"], #nên khi gọi phương cart.values() sẽ gọi được các biến đó
                                    GiaBan=p["Gia"])
             db.session.add(chiTietHoaDon)

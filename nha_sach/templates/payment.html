@@ -12,7 +12,7 @@
         <div class="container">
             <div class="alert alert-success" style="background-image: url('../static/images/wave.png');">
                 <div>
-                <h1 class="text-center">PHIẾU MUA HÀNG</h1>
+                <h1 class="text-center">ĐƠN ĐẶT HÀNG</h1>
                 </div>
                 <div class="alert">
                     <h3>Tổng số lượng sản phẩm: <span id="tongSoLuong"> {{ tongSoLuong }} </span></h3>
@@ -23,7 +23,7 @@
             <table class="table table-secondary table-bordered">
                 <thead class="thead-dark">
                     <tr>
-                        <th class="text-center">STT</th>
+                        <th class="text-center">Mã Sách</th>
                         <th class="text-center">Tên</th>
                         <th class="text-center">Giá</th>
                         <th class="text-center">Số Lượng</th>
@@ -32,20 +32,20 @@
                 </thead>
                 {% if 'gioHang' in session %}
                 {% for p in session['gioHang'].values() %} <!-- p. được là do trong giỏ hàng đã định nghĩa STT, Ten, Gia rồi -->
-                <tr id="item{{ p.STT }}">
-                    <td class="text-center">{{ p.STT }}</td>
+                <tr id="item{{ p.Ma_Sach }}">
+                    <td class="text-center">{{ p.Ma_Sach }}</td>
                     <td class="text-center">{{ p.Ten }}</td>
                     <td class="text-center">{{ "{:,.0f}".format(p.Gia) }} VNĐ</td>
                     <td class="text-center">
                         <div class="form-group">
                             <input type="number"
-                                   onchange="capNhatSanPhamTrongGioHang(this, {{ p.STT }})"
+                                   onchange="capNhatSanPhamTrongGioHang(this, {{ p.Ma_Sach }})"
                                    value="{{ p.soLuong }}"
                                    class="form-control" />
                         </div>
                     </td>
                     <td class="text-center">
-                        <a href="javascript:;" onclick="xoaSanPhamTrongGioHang({{ p.STT }})"><h6>Xóa</h6></a>
+                        <a href="javascript:;" onclick="xoaSanPhamTrongGioHang({{ p.Ma_Sach }})"><h6>Xóa</h6></a>
                     </td>
                 </tr>
                 {% endfor %}
@@ -60,7 +60,7 @@
                     value="Thanh Toán"
                     class="btn btn-danger" />
             <div class="btn btn-danger">
-                <a href="{{ url_for('danhsach_Sach') }}"><h5 class="text text-light">Quay Lại Danh Mục Sách</h5></a>
+                <a href="{{ url_for('danhsach_Sach') }}"><h5 class="text text-light">Danh Mục Sách</h5></a>
             </div>
             </div>
         </div>

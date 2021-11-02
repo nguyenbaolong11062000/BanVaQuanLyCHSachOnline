@@ -98,7 +98,7 @@ def dangKyKhachHang():
             Email = request.form.get('Email')
             TenDangNhap = request.form.get('TenDangNhap')
             GioiTinh = request.form.get('GioiTinh')
-            HinhAnh = request.files["avatar"]
+            HinhAnh = request.files["hinhDaiDien"]
 
             duongDan_HinhAnh = 'images/upload/%s' % HinhAnh.filename
             HinhAnh.save(os.path.join(app.root_path, 'static/', duongDan_HinhAnh))
@@ -129,15 +129,15 @@ def them_vao_gio_hang():
     gioHang = session['gioHang']
 
     duLieu = json.loads(request.data)
-    STT = str(duLieu.get("STT"))
+    Ma_Sach = str(duLieu.get("Ma_Sach"))
     Ten = duLieu.get("Ten")
     Gia = duLieu.get("Gia")
 
-    if STT in gioHang:
-        gioHang[STT]["soLuong"] = gioHang[STT]["soLuong"] + 1
+    if Ma_Sach in gioHang:
+        gioHang[Ma_Sach]["soLuong"] = gioHang[Ma_Sach]["soLuong"] + 1
     else:
-        gioHang[STT] = {
-            "STT": STT,
+        gioHang[Ma_Sach] = {
+            "Ma_Sach": Ma_Sach,
             "Ten": Ten,
             "Gia": Gia,
             "soLuong": 1
@@ -153,8 +153,7 @@ def them_vao_gio_hang():
     })
 
 #thanh toán giỏ hàng
-@app.route('/phieuMuaHang')
-@decorator.login_required
+@app.route('/donDatHang')
 def chuyenSang_thanhToan():
     tongSoLuong, tongTien = utils.tinhTongTien_SoLuong(session.get('gioHang'))
     return render_template('payment.html',
@@ -165,7 +164,7 @@ def chuyenSang_thanhToan():
 def ghiNhan_thanhToan():
     if utils.ghiNhanHoaDon(session.get('gioHang')):
         del session['gioHang']
-        return jsonify({'thongBao': 'Ghi nhận phiếu mua hàng thành công!'})
+        return jsonify({'thongBao': 'Ghi nhận đơn đặt hàng thành công!'})
 
     return jsonify({'thongBao': 'Không có sản phẩm để thanh toán! Vui lòng quay lại chọn sản phẩm'})
 

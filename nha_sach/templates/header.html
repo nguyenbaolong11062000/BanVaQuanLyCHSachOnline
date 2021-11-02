@@ -2,7 +2,10 @@
         <div class="main-menu">
             <div class="container">
                 {% if current_user.is_authenticated %}
-                <div class="welcome">Chào mừng bạn đến với nhà sách : {{ current_user.Ho }} {{ current_user.Ten }} </div>
+                <div class="welcome">Chào mừng bạn đến với nhà sách :
+                    <i class="fa fa-user"></i>
+                    {{ current_user.Ho }} {{ current_user.Ten }}
+                </div>
                 {% endif %}
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <h1 class="text-success">NHÀ SÁCH LT</h1>
