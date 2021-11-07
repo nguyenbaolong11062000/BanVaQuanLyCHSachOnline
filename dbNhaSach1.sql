@@ -41,7 +41,7 @@ CREATE TABLE `chitietdonhang` (
 
 LOCK TABLES `chitietdonhang` WRITE;
 /*!40000 ALTER TABLE `chitietdonhang` DISABLE KEYS */;
-INSERT INTO `chitietdonhang` VALUES (1,1,2,119500,0),(1,2,1,115000,0),(1,5,1,19000,0),(1,6,1,25000,0),(1,7,1,209000,0),(2,2,3,115000,0),(2,3,2,92600,0),(2,4,2,92650,0),(2,5,2,19000,0),(2,6,2,25000,0),(2,7,1,209000,0),(3,1,3,119500,0),(3,2,3,115000,0),(3,3,1,92600,0),(3,4,2,92650,0),(3,5,4,19000,0),(3,6,4,25000,0),(3,7,3,209000,0),(4,1,2,119500,0),(4,2,2,115000,0),(4,3,4,92600,0),(4,4,2,92650,0),(4,5,1,19000,0),(4,6,1,25000,0),(4,7,1,209000,0),(5,2,1,115000,0),(5,3,2,92600,0),(5,4,0,92650,0),(5,5,1,19000,0),(5,6,1,25000,0),(5,7,3,209000,0);
+INSERT INTO `chitietdonhang` VALUES (1,1,2,119500,0),(1,2,1,115000,0),(1,5,1,19000,0),(1,6,1,25000,0),(1,7,1,209000,0),(2,2,3,115000,0),(2,3,2,92600,0),(2,4,2,92650,0),(2,5,2,19000,0),(2,6,2,25000,0),(2,7,1,209000,0),(3,1,3,119500,0),(3,2,3,115000,0),(3,3,1,92600,0),(3,4,2,92650,0),(3,5,4,19000,0),(3,6,4,25000,0),(3,7,3,209000,0),(4,1,2,119500,0),(4,2,2,115000,0),(4,3,4,92600,0),(4,4,2,92650,0),(4,5,1,19000,0),(4,6,1,25000,0),(4,7,1,209000,0),(5,2,1,115000,0),(5,3,2,92600,0),(5,4,0,92650,0),(5,5,1,19000,0),(5,6,1,25000,0),(5,7,3,209000,0),(6,1,3,119500,0),(6,2,5,115000,0),(6,3,3,92600,0),(6,4,2,92650,0),(6,5,1,19000,0),(6,6,1,25000,0),(6,7,2,209000,0),(7,2,1,115000,0);
 /*!40000 ALTER TABLE `chitietdonhang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,7 +59,7 @@ CREATE TABLE `donhang` (
   PRIMARY KEY (`MaDH`),
   KEY `ma_kh` (`ma_kh`),
   CONSTRAINT `donhang_ibfk_1` FOREIGN KEY (`ma_kh`) REFERENCES `khachhang` (`MaKH`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +68,7 @@ CREATE TABLE `donhang` (
 
 LOCK TABLES `donhang` WRITE;
 /*!40000 ALTER TABLE `donhang` DISABLE KEYS */;
-INSERT INTO `donhang` VALUES (1,'2021-10-31 16:43:57',2),(2,'2021-11-01 13:20:06',2),(3,'2021-11-01 13:53:46',2),(4,'2021-11-01 14:04:36',2),(5,'2021-11-01 14:36:13',2);
+INSERT INTO `donhang` VALUES (1,'2021-10-31 16:43:57',2),(2,'2021-11-01 13:20:06',2),(3,'2021-11-01 13:53:46',2),(4,'2021-11-01 14:04:36',2),(5,'2021-11-01 14:36:13',2),(6,'2021-11-02 12:38:58',2),(7,'2021-11-06 12:47:33',2);
 /*!40000 ALTER TABLE `donhang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,7 +94,7 @@ CREATE TABLE `khachhang` (
   PRIMARY KEY (`MaKH`),
   UNIQUE KEY `TenDangNhap` (`TenDangNhap`),
   CONSTRAINT `khachhang_chk_1` CHECK ((`HoatDonng` in (0,1)))
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +103,7 @@ CREATE TABLE `khachhang` (
 
 LOCK TABLES `khachhang` WRITE;
 /*!40000 ALTER TABLE `khachhang` DISABLE KEYS */;
-INSERT INTO `khachhang` VALUES (1,NULL,'ADMIN1','admin1@ou.edu.vn','admin1','e10adc3949ba59abbe56e057f20f883e','nam',NULL,'0937752035',NULL,'ADMIN'),(2,'Nguyễn','Bảo Long','1851050083long@ou.edu.vn','user2','e10adc3949ba59abbe56e057f20f883e','male','images/upload/baoLong.png','0937752035',1,'KH');
+INSERT INTO `khachhang` VALUES (1,NULL,'ADMIN1','admin1@ou.edu.vn','admin1','e10adc3949ba59abbe56e057f20f883e','Nam',NULL,'0937752035',1,'ADMIN'),(2,'Nguyễn','Bảo Long','1851050083long@ou.edu.vn','user2','e10adc3949ba59abbe56e057f20f883e','Nam','images/upload/baoLong.png','0937752035',1,'KH'),(3,'Nguyễn','Bảo Hoàng','baohoang15062013@gmail.com','baohoang123','665a61beec34b84e2f79c6d18f3c29ca','Nam','images/upload/anh4.png','0764380261',1,'KH');
 /*!40000 ALTER TABLE `khachhang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,7 +176,7 @@ CREATE TABLE `tacgia` (
   `HinhAnh` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `TieuSu` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`MaTG`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -185,7 +185,7 @@ CREATE TABLE `tacgia` (
 
 LOCK TABLES `tacgia` WRITE;
 /*!40000 ALTER TABLE `tacgia` DISABLE KEYS */;
-INSERT INTO `tacgia` VALUES (1,'Machiavelli','Niccolò','images/the prince.jpg',' Một nhà ngoại giao, nhà triết học và nhà văn thời Phục hưng người Ý, nổi tiếng với tác phẩm Quân vương, được viết vào năm 1513.'),(2,'Rousseau','Jean - Jacques ','images/banKheUoc.jpg','Một nhà triết học thuộc trào lưu Khai sáng có ảnh hưởng lớn tới Cách mạng Pháp 1789, sự phát triển của lý thuyết xã hội, và sự phát triển của chủ nghĩa dân tộc'),(3,' Hirata','Andrea','images/chienBinhCV.jpg','Một tác giả người Indonesia nổi tiếng với tiểu thuyết Laskar Pelangi năm 2005 và các phần tiếp theo của nó'),(4,NULL,'Nhà Xuất Bản Giáo Dục','images/SGK5.png','Nơi phát hành các loại sách trên đất nước Việt Nam'),(5,'Fujiko','Fujio','images/doraemonAuthor.jpg','Fujiko Fujio là bút danh chung của hai nghệ sĩ manga Nhật Bản, người Việt gọi là Ông Hai Phú hay Ông Phú Sĩ. Tên thật của họ là Fujimoto Hiroshi và Abiko Motoo'),(6,'Lee','Eung-bok','images/goblinAuthor.jpg','Là đạo diễn người Hàn Quốc, nổi tiếng bởi phim Goblin được chuyển thể từ tập truyện tranh cùng tên.'),(7,'Aoyama','Gōshō','images/conanAuthor.jpg','Aoyama Gōshō, tên khai sinh là Aoyama Yoshimasa, sinh ngày 21 tháng 6 năm 1963 tại Hokuei tỉnh Tottori, Nhật Bản. Ông là một nhà sáng tác truyện tranh, người được biết đến với bộ truyện tranh Thám tử lừng danh Conan.');
+INSERT INTO `tacgia` VALUES (1,'Machiavelli','Niccolò','images/author the prince.jpg',' Một nhà ngoại giao, nhà triết học và nhà văn thời Phục hưng người Ý, nổi tiếng với tác phẩm Quân vương, được viết vào năm 1513.'),(2,'Rousseau','Jean - Jacques ','images/banKheUocTacGia.jpg','Một nhà triết học thuộc trào lưu Khai sáng có ảnh hưởng lớn tới Cách mạng Pháp 1789, sự phát triển của lý thuyết xã hội, và sự phát triển của chủ nghĩa dân tộc.'),(3,' Hirata','Andrea','images/chienBinhCV_tacGia.jpg','Một tác giả người Indonesia nổi tiếng với tiểu thuyết Laskar Pelangi năm 2005 và các phần tiếp theo của nó.'),(4,'Nhà Xuất Bản','Giáo Dục','images/SGK5.png','Nơi phát hành các loại sách trên đất nước Việt Nam.'),(5,'Fujimoto','Hiroshi','images/doraemonAuthor.jpg','Là nghệ sĩ manga người Nhật Bản, đồng sáng tác truyện tranh Doraemon với Abiko Motoo.'),(6,'Lee','Eung-bok','images/goblinAuthor.jpg','Là đạo diễn người Hàn Quốc, nổi tiếng bởi phim Goblin được chuyển thể từ tập truyện tranh cùng tên.'),(7,'Aoyama','Gōshō','images/conanAuthor.jpg','Aoyama Gōshō, tên khai sinh là Aoyama Yoshimasa, sinh ngày 21 tháng 6 năm 1963 tại Hokuei tỉnh Tottori, Nhật Bản. Ông là một nhà sáng tác truyện tranh, người được biết đến với bộ truyện tranh Thám tử lừng danh Conan.'),(9,'Abiko','Motoo','images/doraemonAuthor2.jpg','Là nghệ sĩ manga người Nhật Bản, đồng sáng tác truyện tranh Doraemon với Fujimoto Hiroshi. Hai người đều dùng cái tên \"Fujiko Fujio\" đến năm 1987, họ chia tay để theo đuổi con đường sáng tác riêng lẻ và trở thành \"Fujiko F. Fujio\" và \"Fujiko Fujio (A)\".');
 /*!40000 ALTER TABLE `tacgia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,7 +212,7 @@ CREATE TABLE `tacgiavietsach` (
 
 LOCK TABLES `tacgiavietsach` WRITE;
 /*!40000 ALTER TABLE `tacgiavietsach` DISABLE KEYS */;
-INSERT INTO `tacgiavietsach` VALUES (1,1),(4,2),(2,3),(3,4),(5,5),(7,6),(6,7);
+INSERT INTO `tacgiavietsach` VALUES (1,1),(4,2),(2,3),(3,4),(5,5),(9,5),(7,6),(6,7);
 /*!40000 ALTER TABLE `tacgiavietsach` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -225,4 +225,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-01 14:41:24
+-- Dump completed on 2021-11-07  9:49:44
