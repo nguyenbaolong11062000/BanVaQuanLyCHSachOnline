@@ -21,7 +21,9 @@
                         <li>{{ cuon_sach.MoTaSach }}</li>
                         <li>Tác giả:
                             <a id="popup-tacGia" onclick="hienThi()">
-                                {{ cuon_sach.tg_vietsach[0].TacGia.Ten }} {{ cuon_sach.tg_vietsach[0].TacGia.Ho }}
+                                {% for p in cuon_sach.tg_vietsach %}
+                                    {{ p.TacGia.Ten }} {{ p.TacGia.Ho }} &nbsp;<!-- &nbsp là chèn khoảng trống -->
+                                {% endfor %}
                             </a>
                         </li>
                         <li>Năm Xuất Bản: {{ cuon_sach.NamXuatBan }}</li>
@@ -45,19 +47,22 @@
             <div class="popup-content">
                 <span class="close-btn">&times;</span>
                 <div class="container">
+                    <h3 id="thongTinVeTacGia">Thông Tin Về Tác Giả</h3>
                     <div class="row">
+                        {% for p in cuon_sach.tg_vietsach %}
                         <div class="col-md-4">
-                            <img src="{{ url_for('static', filename=cuon_sach.tg_vietsach[0].TacGia.HinhAnh) }}" />
+                            <img src="{{ url_for('static', filename=p.TacGia.HinhAnh) }}" />
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <h3>
                                 <ul>
-                                    <li>Họ: {{ cuon_sach.tg_vietsach[0].TacGia.Ho }}</li>
-                                    <li>Tên: {{ cuon_sach.tg_vietsach[0].TacGia.Ten }}</li>
-                                    <li>Tiểu sử: {{ cuon_sach.tg_vietsach[0].TacGia.TieuSu }}</li>
+                                    <li>Họ: {{ p.TacGia.Ho }}</li>
+                                    <li>Tên: {{ p.TacGia.Ten }}</li>
+                                    <li>Tiểu sử: {{ p.TacGia.TieuSu }}</li>
                                 </ul>
                             </h3>
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

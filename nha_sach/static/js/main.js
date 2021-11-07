@@ -92,4 +92,4 @@ function hienThi() {
             xemChiTiet.style.display = "none"
         }
     }
-}z
+}

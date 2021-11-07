@@ -248,3 +248,9 @@ button {
 .btn {
     font-size: large;
 }
+
+#thongTinVeTacGia {
+    font-size: xx-large;
+    text-align: center;
+    color: red;
+}
