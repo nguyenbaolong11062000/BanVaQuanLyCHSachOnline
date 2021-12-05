@@ -41,7 +41,7 @@ CREATE TABLE `chitietdonhang` (
 
 LOCK TABLES `chitietdonhang` WRITE;
 /*!40000 ALTER TABLE `chitietdonhang` DISABLE KEYS */;
-INSERT INTO `chitietdonhang` VALUES (1,1,2,119500,0),(1,2,1,115000,0),(1,5,1,19000,0),(1,6,1,25000,0),(1,7,1,209000,0),(2,2,3,115000,0),(2,3,2,92600,0),(2,4,2,92650,0),(2,5,2,19000,0),(2,6,2,25000,0),(2,7,1,209000,0),(3,1,3,119500,0),(3,2,3,115000,0),(3,3,1,92600,0),(3,4,2,92650,0),(3,5,4,19000,0),(3,6,4,25000,0),(3,7,3,209000,0),(4,1,2,119500,0),(4,2,2,115000,0),(4,3,4,92600,0),(4,4,2,92650,0),(4,5,1,19000,0),(4,6,1,25000,0),(4,7,1,209000,0),(5,2,1,115000,0),(5,3,2,92600,0),(5,4,0,92650,0),(5,5,1,19000,0),(5,6,1,25000,0),(5,7,3,209000,0),(6,1,3,119500,0),(6,2,5,115000,0),(6,3,3,92600,0),(6,4,2,92650,0),(6,5,1,19000,0),(6,6,1,25000,0),(6,7,2,209000,0),(7,2,1,115000,0),(8,1,1,119500,0),(8,2,1,115000,0),(8,3,1,92600,0),(8,4,1,92650,0),(8,5,1,19000,0),(8,6,1,25000,0),(8,7,1,209000,0);
+INSERT INTO `chitietdonhang` VALUES (1,1,2,119500,0),(1,2,1,115000,0),(1,5,1,19000,0),(1,6,1,25000,0),(1,7,1,209000,0),(2,2,3,115000,0),(2,3,2,92600,0),(2,4,2,92650,0),(2,5,2,19000,0),(2,6,2,25000,0),(2,7,1,209000,0),(3,1,3,119500,0),(3,2,3,115000,0),(3,3,1,92600,0),(3,4,2,92650,0),(3,5,4,19000,0),(3,6,4,25000,0),(3,7,3,209000,0),(4,1,2,119500,0),(4,2,2,115000,0),(4,3,4,92600,0),(4,4,2,92650,0),(4,5,1,19000,0),(4,6,1,25000,0),(4,7,1,209000,0),(5,2,1,115000,0),(5,3,2,92600,0),(5,4,0,92650,0),(5,5,1,19000,0),(5,6,1,25000,0),(5,7,3,209000,0),(6,1,3,119500,0),(6,2,5,115000,0),(6,3,3,92600,0),(6,4,2,92650,0),(6,5,1,19000,0),(6,6,1,25000,0),(6,7,2,209000,0),(7,2,1,115000,0),(8,1,1,119500,0),(8,2,1,115000,0),(8,3,1,92600,0),(8,4,1,92650,0),(8,5,1,19000,0),(8,6,1,25000,0),(8,7,1,209000,0),(9,1,1,119500,0.01),(9,2,1,115000,0.01),(9,3,1,92600,0.01),(9,4,5,92650,0.01),(9,5,2,19000,0.01),(9,6,2,25000,0.01),(9,7,1,209000,0.01);
 /*!40000 ALTER TABLE `chitietdonhang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,7 +59,7 @@ CREATE TABLE `donhang` (
   PRIMARY KEY (`MaDH`),
   KEY `ma_kh` (`ma_kh`),
   CONSTRAINT `donhang_ibfk_1` FOREIGN KEY (`ma_kh`) REFERENCES `khachhang` (`MaKH`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +68,7 @@ CREATE TABLE `donhang` (
 
 LOCK TABLES `donhang` WRITE;
 /*!40000 ALTER TABLE `donhang` DISABLE KEYS */;
-INSERT INTO `donhang` VALUES (1,'2021-10-31 16:43:57',2),(2,'2021-11-01 13:20:06',2),(3,'2021-11-01 13:53:46',2),(4,'2021-11-01 14:04:36',2),(5,'2021-11-01 14:36:13',2),(6,'2021-11-02 12:38:58',2),(7,'2021-11-06 12:47:33',2),(8,'2021-11-14 15:25:58',2);
+INSERT INTO `donhang` VALUES (1,'2021-10-31 16:43:57',2),(2,'2021-11-01 13:20:06',2),(3,'2021-11-01 13:53:46',2),(4,'2021-11-01 14:04:36',2),(5,'2021-11-01 14:36:13',2),(6,'2021-11-02 12:38:58',2),(7,'2021-11-06 12:47:33',2),(8,'2021-11-14 15:25:58',2),(9,'2021-12-05 14:05:35',4);
 /*!40000 ALTER TABLE `donhang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,20 +81,20 @@ DROP TABLE IF EXISTS `khachhang`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `khachhang` (
   `MaKH` int NOT NULL AUTO_INCREMENT,
-  `Ho` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Ten` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Email` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `TenDangNhap` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `MatKhau` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `GioiTinh` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `HinhAnh` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `SoDT` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `HoatDonng` tinyint(1) DEFAULT NULL,
-  `VaiTro` enum('KH','ADMIN') COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Ho` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Ten` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Email` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `TenDangNhap` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `MatKhau` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `GioiTinh` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `HinhAnh` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `SoDT` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `HoatDong` tinyint(1) DEFAULT NULL,
+  `VaiTro` enum('KH','ADMIN') CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`MaKH`),
   UNIQUE KEY `TenDangNhap` (`TenDangNhap`),
-  CONSTRAINT `khachhang_chk_1` CHECK ((`HoatDonng` in (0,1)))
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  CONSTRAINT `khachhang_chk_1` CHECK ((`HoatDong` in (0,1)))
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +103,7 @@ CREATE TABLE `khachhang` (
 
 LOCK TABLES `khachhang` WRITE;
 /*!40000 ALTER TABLE `khachhang` DISABLE KEYS */;
-INSERT INTO `khachhang` VALUES (1,NULL,'ADMIN1','admin1@ou.edu.vn','admin1','e10adc3949ba59abbe56e057f20f883e','Nam',NULL,'0937752035',1,'ADMIN'),(2,'Nguyễn','Bảo Long','1851050083long@ou.edu.vn','user2','e10adc3949ba59abbe56e057f20f883e','Nam','images/upload/baoLong.png','0937752035',1,'KH'),(3,'Nguyễn','Bảo Hoàng','baohoang15062013@gmail.com','baohoang123','665a61beec34b84e2f79c6d18f3c29ca','Nam','images/upload/anh4.png','0764380261',1,'KH');
+INSERT INTO `khachhang` VALUES (1,NULL,'ADMIN1','admin1@ou.edu.vn','admin1','e10adc3949ba59abbe56e057f20f883e','Nam',NULL,'0937752035',1,'ADMIN'),(2,'Nguyễn','Bảo Long','1851050083long@ou.edu.vn','user2','e10adc3949ba59abbe56e057f20f883e','Nam','images/upload/baoLong.png','0937752035',1,'KH'),(3,'Nguyễn','Bảo Hoàng','baohoang15062013@gmail.com','baohoang123','665a61beec34b84e2f79c6d18f3c29ca','Nam','images/upload/anh4.png','0764380261',1,'KH'),(4,'Nguyễn','Thị Yến Nhi','nhi@ou.edu.vn','nhi123','25f9e794323b453885f5181f1b624d0b','Nữ','images/upload/nhi.png','0374561021',1,'KH');
 /*!40000 ALTER TABLE `khachhang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,7 +116,7 @@ DROP TABLE IF EXISTS `loaisach`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `loaisach` (
   `MaLoaiSach` int NOT NULL AUTO_INCREMENT,
-  `MieuTaLoaiSach` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `MieuTaLoaiSach` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`MaLoaiSach`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -140,10 +140,10 @@ DROP TABLE IF EXISTS `sach`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sach` (
   `MaSach` int NOT NULL AUTO_INCREMENT,
-  `TuaSach` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `MoTaSach` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `TuaSach` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `MoTaSach` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `GiaBia` float DEFAULT NULL,
-  `HinhAnh` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `HinhAnh` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `NamXuatBan` int NOT NULL,
   `ma_loaiSach` int NOT NULL,
   PRIMARY KEY (`MaSach`),
@@ -171,10 +171,10 @@ DROP TABLE IF EXISTS `tacgia`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tacgia` (
   `MaTG` int NOT NULL AUTO_INCREMENT,
-  `Ho` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Ten` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `HinhAnh` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `TieuSu` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Ho` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Ten` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `HinhAnh` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `TieuSu` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`MaTG`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -225,4 +225,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-05 12:51:07
+-- Dump completed on 2021-12-05 14:08:30

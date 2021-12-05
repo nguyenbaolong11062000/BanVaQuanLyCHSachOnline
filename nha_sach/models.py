@@ -24,7 +24,7 @@ class KhachHang(db.Model, UserMixin):
     GioiTinh = Column(String(100), nullable=False)
     HinhAnh = Column(String(100))
     SoDT = Column(String(100), nullable=False)
-    HoatDonng = Column(Boolean, default=True)
+    HoatDong = Column(Boolean, default=True)
     VaiTro = Column(Enum(PhanQuyen), default=PhanQuyen.KH)
     don_hang = relationship('DonHang', backref='TenKH', lazy=True)
 

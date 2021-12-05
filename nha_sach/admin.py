@@ -155,7 +155,7 @@ class BangKhacHang(ModelView):
         'GioiTinh': 'Giới Tính',
         'HinhAnh': 'Hình Ảnh',
         'SoDT': 'Số Điện Thoại',
-        'HoatDonng': 'Còn Sử Dụng',
+        'HoatDong': 'Còn Sử Dụng',
         'VaiTro': 'Phân Quyền',
     }
     form_excluded_columns = ['don_hang']

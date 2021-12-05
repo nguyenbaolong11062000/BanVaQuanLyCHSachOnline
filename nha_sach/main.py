@@ -42,7 +42,7 @@ def chitiet_Sach(ma_sach):
 
 
 #đăng nhập khách hàng
-@app.route('/login-user', methods=['POST', 'GET'])
+@app.route('/dangNhap', methods=['POST', 'GET'])
 def dangNhap():
     thong_bao = ""
     if request.method == 'POST':
@@ -65,7 +65,7 @@ def dangNhap():
     return render_template("login_user.html", thong_bao=thong_bao)
 
 #đăng nhập trang admin
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/dangNhapAdmin', methods=['GET', 'POST'])
 def dangNhapAdmin():
     if request.method == 'POST':
         TenDangNhap = request.form.get('TenDangNhap')
