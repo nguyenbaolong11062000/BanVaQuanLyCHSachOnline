@@ -8,7 +8,7 @@ from datetime import datetime
 
 
 
-class UserRole(UserEnum):
+class PhanQuyen(UserEnum):
     KH = 1
     ADMIN = 2
 
@@ -17,15 +17,15 @@ class KhachHang(db.Model, UserMixin):
 
     MaKH = Column(Integer, primary_key=True, autoincrement=True)
     Ho = Column(String(50), nullable=True)
-    Ten = Column(String(50), nullable=True)
-    Email = Column(String(50))
+    Ten = Column(String(50), nullable=False)
+    Email = Column(String(50), nullable=False)
     TenDangNhap = Column(String(100), nullable=False, unique=True)
     MatKhau = Column(String(100), nullable=False)
     GioiTinh = Column(String(100), nullable=False)
     HinhAnh = Column(String(100))
     SoDT = Column(String(100), nullable=False)
     HoatDonng = Column(Boolean, default=True)
-    VaiTro = Column(Enum(UserRole), default=UserRole.KH)
+    VaiTro = Column(Enum(PhanQuyen), default=PhanQuyen.KH)
     don_hang = relationship('DonHang', backref='TenKH', lazy=True)
 
     #định nghĩa lại hàm decorator @login.user_loader vì mặc định khi gọi login_user
@@ -41,7 +41,7 @@ class LoaiSach(db.Model):
     __tablename__ = 'LoaiSach'
 
     MaLoaiSach = Column(Integer, primary_key=True)
-    MieuTaLoaiSach = Column(String(100), nullable=True)
+    MieuTaLoaiSach = Column(String(100), nullable=False)
     sach = relationship('Sach', backref='LoaiSach', lazy=True)
 
     def __str__(self):
@@ -55,7 +55,7 @@ class Sach(db.Model):
     TuaSach = Column(String(50), nullable=False)
     MoTaSach = Column(String(255))
     GiaBia = Column(Float, default=0)
-    HinhAnh = Column(String(100))
+    HinhAnh = Column(String(100), nullable=False)
     NamXuatBan = Column(Integer, nullable=False)
     ma_loaiSach = Column(Integer, ForeignKey(LoaiSach.MaLoaiSach), nullable=False)
     chiTiet_DH = relationship('ChiTietDonHang', backref='Sach', lazy=True)
@@ -79,14 +79,14 @@ class ChiTietDonHang(db.Model):
     ma_sach = Column(Integer, ForeignKey(Sach.MaSach), primary_key=True)
     SoLuong = Column(Integer, default=0)
     GiaBan = Column(Float, default=0)
-    TyLeGiamGia = Column(Float, default=0)
+    TyLeGiamGia = Column(Float, default=0.01)
 
 class TacGia(db.Model):
     __tablename__ = 'TacGia'
     MaTG = Column(Integer, primary_key=True)
-    Ho = Column(String(50), nullable=True)
-    Ten = Column(String(50), nullable=True)
-    HinhAnh = Column(String(50))
+    Ho = Column(String(50), nullable=False)
+    Ten = Column(String(50), nullable=False)
+    HinhAnh = Column(String(50), nullable=False)
     TieuSu = Column(String(255))
     tg_vietsach = relationship('TacGiaVietSach', backref='TacGia', lazy=True)
 

@@ -1,5 +1,5 @@
 import hashlib
-from nha_sach.models import UserRole, Sach, KhachHang, DonHang, ChiTietDonHang, TacGiaVietSach, TacGia
+from nha_sach.models import PhanQuyen, Sach, KhachHang, DonHang, ChiTietDonHang, TacGiaVietSach, TacGia
 from nha_sach import db
 from flask_login import current_user
 from sqlalchemy import or_
@@ -28,7 +28,7 @@ def thongtinSach_theoMaSach(ma_sach):
 
 
 #kiểm tra đăng nhập admin
-def kiemTraDangNhapADMIN(TenDangNhap, MatKhau, VaiTro=UserRole.ADMIN):
+def kiemTraDangNhapADMIN(TenDangNhap, MatKhau, VaiTro=PhanQuyen.ADMIN):
     matKhau = str(hashlib.md5(MatKhau.strip().encode('utf-8')).hexdigest())
 
     nguoidung_ADMIN = KhachHang.query.filter(KhachHang.TenDangNhap == TenDangNhap.strip(),
