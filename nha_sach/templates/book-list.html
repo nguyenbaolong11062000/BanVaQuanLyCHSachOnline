@@ -13,8 +13,10 @@
         <h1 class="text-center text-danger">
             <a href="{{ url_for('trangChu') }}"><i class="fa fa-home"></i></a>
             DANH MỤC SÁCH
-            <a class="badge badge-primary" href=" {{ url_for('chuyenSang_thanhToan') }} " id="thongTinGioHang">
-                  <i class="fa fa-shopping-cart"></i></a>
+            <div id="gioHang">
+                <a class="badge badge-primary"><i class="fa fa-shopping-cart"></i></a>
+                <a class="badge badge-primary" href=" {{ url_for('chuyenSang_thanhToan') }} " id="thongTinGioHang">0</a>
+            </div>
         </h1>
         <div>
             <form>

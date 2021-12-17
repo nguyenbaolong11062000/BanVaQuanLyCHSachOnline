@@ -17,7 +17,22 @@ class GioiThieu(BaseView):
     def index(self):
         return self.render('admin/about-us.html')
 
-class BangLoaiSach(ModelView):
+class DangXuat(BaseView):
+    @expose('/')
+    def logout(self):
+        logout_user()
+
+        return redirect('/admin')
+
+    def is_accessible(self):
+        return current_user.is_authenticated
+
+
+class KiemTraDangNhapVaHienThi(ModelView):
+    def is_accessible(self):#mặc định trả ra True (ai cũng được đăng nhập)
+        return current_user.is_authenticated and current_user.VaiTro == PhanQuyen.ADMIN #View chỉ hiển ra khi đã đăng nhập và đăng nhập dưới quyền ADMIN
+
+class BangLoaiSach(KiemTraDangNhapVaHienThi):
     column_display_pk = True
     can_export = True
     can_view_details = True
@@ -32,11 +47,9 @@ class BangLoaiSach(ModelView):
     } #sửa tên các cột trên trang chủ admin theo ý mình với giá trị key '?' là giá trị cột bên model
     form_excluded_columns = ['sach']
 
-    def is_accessible(self):
-        return current_user.is_authenticated
 
 
-class BangSach(ModelView):
+class BangSach(KiemTraDangNhapVaHienThi):
     column_display_pk = True
     can_export = True
     can_view_details = True
@@ -56,10 +69,9 @@ class BangSach(ModelView):
     }
     form_excluded_columns = ['chiTiet_DH', 'tg_vietsach'] #danh sách các cột không hiển thị trong form nhập mới một sản phẩm hoặc sửa thông tin sản phẩm
 
-    def is_accessible(self):
-        return current_user.is_authenticated
 
-class BangTacGia(ModelView):
+
+class BangTacGia(KiemTraDangNhapVaHienThi):
     column_display_pk = True
     can_export = True
     can_view_details = True
@@ -77,10 +89,9 @@ class BangTacGia(ModelView):
     }
     form_excluded_columns = ['tg_vietsach']
 
-    def is_accessible(self):
-        return current_user.is_authenticated
 
-class BangTacGiaVietSach(ModelView):
+
+class BangTacGiaVietSach(KiemTraDangNhapVaHienThi):
     column_display_pk = True
     can_export = True
     can_view_details = True
@@ -92,11 +103,10 @@ class BangTacGiaVietSach(ModelView):
         'Sach': 'Sách'
     }
 
-    def is_accessible(self):
-        return current_user.is_authenticated
 
 
-class BangDonHang(ModelView):
+
+class BangDonHang(KiemTraDangNhapVaHienThi):
     column_display_pk = True
     can_export = True
     can_view_details = True
@@ -111,10 +121,9 @@ class BangDonHang(ModelView):
     }
     form_excluded_columns = ['chiTiet_DH']
 
-    def is_accessible(self):
-        return current_user.is_authenticated
 
-class BangChiTietDonHang(ModelView):
+
+class BangChiTietDonHang(KiemTraDangNhapVaHienThi):
     column_display_pk = True
     can_export = True
     can_view_details = True
@@ -131,12 +140,10 @@ class BangChiTietDonHang(ModelView):
         'TyLeGiamGia': 'Tỷ Lệ Giảm Giá'
     }
 
-    def is_accessible(self):
-        return current_user.is_authenticated
 
 
 
-class BangKhacHang(ModelView):
+class BangKhacHang(KiemTraDangNhapVaHienThi):
     column_display_pk = True
     can_export = True
     can_view_details = True
@@ -160,18 +167,6 @@ class BangKhacHang(ModelView):
     }
     form_excluded_columns = ['don_hang']
 
-    def is_accessible(self):
-        return current_user.is_authenticated
-
-class DangXuat(BaseView):
-    @expose('/')
-    def logout(self):
-        logout_user()
-
-        return redirect('/admin')
-
-    def is_accessible(self):
-        return current_user.is_authenticated
 
 
 admin.add_view(BangKhacHang(KhachHang, db.session, name='Khách Hàng'))

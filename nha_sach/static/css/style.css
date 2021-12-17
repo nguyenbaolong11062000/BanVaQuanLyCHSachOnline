@@ -238,11 +238,11 @@ button {
     cursor: pointer;
 }
 
-.badge {
+#gioHang {
     position: fixed;
     right: 0px;
     top: 15%;
-    font-size: x-large;
+    font-size: xx-large;
 }
 
 .btn {

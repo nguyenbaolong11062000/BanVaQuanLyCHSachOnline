@@ -11,7 +11,7 @@ function themVaoGioHang(Ma_Sach, Ten, Gia) {
         }
     }).then(res => res.json()).then(data => {
         console.info(data);
-        document.getElementById("thongTinGioHang").innerText = `${data.tongSoLuong} - ${data.tongTien} VNĐ`;
+        document.getElementById("thongTinGioHang").innerText = `${data.tongSoLuong}`;
     }).catch(err => {
         console.log(err);
     })
