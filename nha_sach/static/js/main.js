@@ -11,7 +11,7 @@ function themVaoGioHang(Ma_Sach, Ten, Gia) {
         }
     }).then(res => res.json()).then(data => {
         console.info(data);
-        document.getElementById("thongTinGioHang").innerText = `${data.tongSoLuong}`;
+        document.getElementById("thongTinGioHang").innerText = data.tongSoLuong;
     }).catch(err => {
         console.log(err);
     })
@@ -46,8 +46,10 @@ function xoaSanPhamTrongGioHang(ma_sanPham) {
             if(data.code == 200){
                 var x = document.getElementById(`item${data.ma_sanPham}`);
                 x.style.display = 'none';
-                document.getElementById('tongSoLuong').innerText = data.tongSoLuong; //dùng phương thức "innerText" để gán giá trị Text cho thẻ span
-                document.getElementById('tongTien').innerText = data.tongTien; //cập nhật bằng ajax chứ không cập nhật bằng reload (F5 lại) trang
+                let dem = document.getElementsByClassName('demSoLuong')
+                for(let i = 0; i < dem.length; i++)
+                    dem[i].innerText = data.tongSoLuong //dùng phương thức "innerText" để gán giá trị Text cho thẻ span
+                document.getElementById('tongTien').innerText = new Intl.NumberFormat().format(data.tongTien); //cập nhật bằng ajax chứ không cập nhật bằng reload (F5 lại) trang
             } else {
                 alert('Xóa thất bại!');
             }
@@ -68,8 +70,10 @@ function capNhatSanPhamTrongGioHang(obj, ma_sanPham) {
             if(data.code != 200)
                 alert('Cập nhật thất bại!')
             else{
-                document.getElementById('tongSoLuong').innerText = data.tongSoLuong; //dùng phương thức "innerText" để gán giá trị Text cho thẻ span
-                document.getElementById('tongTien').innerText = data.tongTien; //cập nhật bằng ajax chứ không cập nhật bằng reload (F5 lại) trang.
+                let dem = document.getElementsByClassName('demSoLuong')
+                for(let i = 0; i < dem.length; i++)
+                    dem[i].innerText = data.tongSoLuong //dùng phương thức "innerText" để gán giá trị Text cho thẻ span
+                document.getElementById('tongTien').innerText = new Intl.NumberFormat().format(data.tongTien); //cập nhật bằng ajax chứ không cập nhật bằng reload (F5 lại) trang.
             }
         }).catch(err => console.log('Cập nhật thất bại!'));
 }
