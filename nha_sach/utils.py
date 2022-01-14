@@ -1,5 +1,5 @@
 import hashlib
-from nha_sach.models import PhanQuyen, Sach, KhachHang, DonHang, ChiTietDonHang, TacGiaVietSach, TacGia
+from nha_sach.models import PhanQuyen, Sach, KhachHang, DonHang, ChiTietDonHang, TacGiaVietSach, TacGia, BinhLuan
 from nha_sach import db
 from flask_login import current_user
 from sqlalchemy import or_
@@ -86,3 +86,12 @@ def ghiNhanHoaDon(gioHang):
             print(ex)
 
     return False
+
+
+def them_binhLuan(noiDung, ma_Sach):
+    c = BinhLuan(NoiDung=noiDung, ma_Sach=ma_Sach, KhachHang=current_user)
+
+    db.session.add(c)
+    db.session.commit()
+
+    return c

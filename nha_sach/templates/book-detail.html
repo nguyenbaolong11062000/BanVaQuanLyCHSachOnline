@@ -40,9 +40,30 @@
                                 <i class="fa fa-shopping-cart"></i></a>
                         </div>
                     </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <textarea class="form-control" placeholder="Nhập nội dung bình luận..." id="binhLuan"></textarea>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="button" onclick="themBinhLuan({{cuon_sach.MaSach}})" class="btn btn-primary" value="Bình luận">
+                        </div>
+                    </div>
+                    <div id="hienThiBinhLuan">
+                        <div class="row">
+                            <div class="col-md-2 col-xs-4">
+                                <img src="{{ url_for('static', filename='images/baoLong.png') }}" class="img-fluid rounded-circle" alt="binhLuan"/>
+                            </div>
+                            <div class="col-md-10 col-xs-8" id="chiTietBinhLuan">
+                                <p>Sản phẩm tuyệt vời</p>
+                                <p><em>2022-01-14 10:07</em></p>
+                            </div>
+                        </div>
+                    </div>
                 </h3>
             </div>
         </div>
+
         <div class="popup">
             <div class="popup-content">
                 <span class="close-btn">&times;</span>

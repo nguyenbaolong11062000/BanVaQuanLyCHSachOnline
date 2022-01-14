@@ -3,7 +3,7 @@ import hashlib
 from flask import render_template, request, url_for, session, jsonify
 from nha_sach import app, login, utils, decorator
 from nha_sach.admin import *
-from flask_login import login_user
+from flask_login import login_user, current_user
 import os, json
 
 from nha_sach.models import KhachHang
@@ -202,6 +202,26 @@ def capNhatSanPham_trongGioHang(ma_sanPham):
                             'tongSoLuong': tongSoLuong,
                             'tongTien': tongTien})
     return jsonify({'code': 500})
+
+@app.route('/api/binhLuan', methods=['post'])
+def them_binhLuan():
+    duLieu = request.json
+    noiDung = duLieu.get('noiDung')
+    ma_Sach = duLieu.get('ma_Sach')
+
+    try:
+        c = utils.them_binhLuan(noiDung=noiDung, ma_Sach=ma_Sach)
+    except:
+        return {'code': 500, 'thongBao': 'Chương trình đang bị lỗi!'}
+    return {'code': 201, 'BinhLuan': {
+        'maBL': c.MaBL,
+        'noiDung': c.NoiDung,
+        'ngayTao': c.NgayTao,
+        'KH': {
+            'EmailKH': current_user.Email,
+            'anhDaiDien': current_user.HinhAnh
+        }
+    }}
 
 if __name__ == '__main__':
     app.run(debug=True)

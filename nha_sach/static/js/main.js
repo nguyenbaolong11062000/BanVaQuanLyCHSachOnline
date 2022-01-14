@@ -18,7 +18,7 @@ function themVaoGioHang(Ma_Sach, Ten, Gia) {
 }
 
 function ghiNhanThanhToan() {
-    if(confirm("Bạn có chắc chắn thanh toán?")){
+    if(confirm("Bạn có chắc chắn đặt hàng?")){
         fetch('/api/thanhToan', {
         method: "post",
         headers: {
@@ -95,5 +95,39 @@ function hienThi() {
         if(e.target == xemChiTiet){
             xemChiTiet.style.display = "none"
         }
+    }
+}
+//hàm thêm bình luận
+function themBinhLuan(ma_Sach) {
+    let noiDung = document.getElementById('binhLuan')
+    if (noiDung !== null) {
+        fetch('/api/binhLuan', {
+            method: 'post',
+            body: JSON.stringify({
+                'ma_Sach': ma_Sach,
+                'noiDung': noiDung.value
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+
+            }
+        }).then(res => res.json()).then(data => {
+            if(data.code == 201){
+                let c = data.BinhLuan
+
+                let vungBinhLuan = document.getElementById('hienThiBinhLuan')
+                vungBinhLuan.innerHTML = `
+                      <div class="row">
+                          <div class="col-md-2 col-xs-4">
+                              <img src="${c.KH.anhDaiDien}" class="img-fluid rounded-circle" alt="binhLuan"/>
+                          </div>
+                          <div class="col-md-10 col-xs-8" id="chiTietBinhLuan">
+                              <p>${c.noiDung}</p>
+                              <p><em>${c.ngayTao}</em></p>
+                      </div>
+                ` + vungBinhLuan.innerHTML // dấu `` trong javascript dùng để cộng chuỗi bất kì
+            } else if(data.code == 404)
+                alert(data.thongBao)
+        })
     }
 }

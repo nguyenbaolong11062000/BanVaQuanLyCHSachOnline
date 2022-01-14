@@ -27,6 +27,7 @@ class KhachHang(db.Model, UserMixin):
     HoatDong = Column(Boolean, default=True)
     VaiTro = Column(Enum(PhanQuyen), default=PhanQuyen.KH)
     don_hang = relationship('DonHang', backref='TenKH', lazy=True)
+    binhLuan = relationship('BinhLuan', backref='KhachHang', lazy=True)
 
     #định nghĩa lại hàm decorator @login.user_loader vì mặc định khi gọi login_user
     #nó sẽ gọi thuộc tính "id" của bảng KhachHang nên cần phải định nghĩa lại là "id" là "MaKH"
@@ -60,6 +61,7 @@ class Sach(db.Model):
     ma_loaiSach = Column(Integer, ForeignKey(LoaiSach.MaLoaiSach), nullable=False)
     chiTiet_DH = relationship('ChiTietDonHang', backref='Sach', lazy=True)
     tg_vietsach = relationship('TacGiaVietSach', backref='Sach', lazy=True)
+    binhLuan = relationship('BinhLuan', backref='Sach', lazy=True)
 
     def __str__(self):
         return self.TuaSach
@@ -97,6 +99,17 @@ class TacGiaVietSach(db.Model):
     __tablename__ = 'TacGiaVietSach'
     ma_tg = Column(Integer, ForeignKey(TacGia.MaTG), primary_key=True)
     ma_sach = Column(Integer, ForeignKey(Sach.MaSach), primary_key=True)
+
+class BinhLuan(db.Model):
+    __tablename_ = 'BinhLuan'
+    MaBL = Column(Integer, primary_key=True, autoincrement=True)
+    NoiDung = Column(String(255), nullable=False)
+    ma_Sach = Column(Integer, ForeignKey(Sach.MaSach), nullable=False)
+    ma_KhachHang = Column(Integer, ForeignKey(KhachHang.MaKH), nullable=False)
+    NgayTao = Column(DateTime, default=datetime.now())
+
+    def __str__(self):
+        return self.NoiDung
 
 
 if __name__ == '__main__':

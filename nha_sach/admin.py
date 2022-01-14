@@ -67,7 +67,7 @@ class BangSach(KiemTraDangNhapVaHienThi):
         'NamXuatBan': 'Năm Xuất Bản',
         'LoaiSach': 'Loại Sách'
     }
-    form_excluded_columns = ['chiTiet_DH', 'tg_vietsach'] #danh sách các cột không hiển thị trong form nhập mới một sản phẩm hoặc sửa thông tin sản phẩm
+    form_excluded_columns = ['chiTiet_DH', 'tg_vietsach', 'binhLuan'] #danh sách các cột không hiển thị trong form nhập mới một sản phẩm hoặc sửa thông tin sản phẩm
 
 
 
@@ -165,8 +165,24 @@ class BangKhacHang(KiemTraDangNhapVaHienThi):
         'HoatDong': 'Còn Sử Dụng',
         'VaiTro': 'Phân Quyền',
     }
-    form_excluded_columns = ['don_hang']
+    form_excluded_columns = ['don_hang', 'binhLuan']
 
+class BangBinhLuan(KiemTraDangNhapVaHienThi):
+    column_display_pk = True
+    can_export = True
+    can_view_details = True
+    details_modal = True
+    edit_modal = True
+    create_modal = True
+    column_filters = ['NoiDung']
+    column_searchable_list = ['NoiDung', 'NgayTao']
+    column_labels = {
+        'MaBL': 'Mã Bình Luận',
+        'NoiDung': 'Nội Dung',
+        'Sach': 'Sách', #khóa ngoại (tên cột hiện trên trang admin) nếu muốn đổi thì dùng backref
+        'KhachHang': 'Khách Hàng',
+        'NgayTao': 'Ngày Tạo'
+    }
 
 
 admin.add_view(BangKhacHang(KhachHang, db.session, name='Khách Hàng'))
@@ -176,6 +192,7 @@ admin.add_view(BangTacGia(TacGia, db.session, name='Tác Giả'))
 admin.add_view(BangTacGiaVietSach(TacGiaVietSach, db.session, name='Tác Giả Viết Sách'))
 admin.add_view(BangDonHang(DonHang, db.session, name='Đơn Hàng'))
 admin.add_view(BangChiTietDonHang(ChiTietDonHang, db.session, name='Chi Tiết Đơn Hàng'))
+admin.add_view(BangBinhLuan(BinhLuan, db.session, name='Bình Luận'))
 admin.add_view(LienHe(name='Liên hệ'))
 admin.add_view(GioiThieu(name='Giới Thiệu'))
 admin.add_view(DangXuat(name='Đăng Xuất'))
