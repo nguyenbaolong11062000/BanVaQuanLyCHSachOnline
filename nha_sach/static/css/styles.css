@@ -1148,4 +1148,8 @@ footer {
     text-align: left;
     margin-top: 10px; } }
 
+#hinhAnhDD {
+    max-width:25px;
+}
+
 /*# sourceMappingURL=styles.css.map */

@@ -123,7 +123,7 @@ function themBinhLuan(ma_Sach) {
                           </div>
                           <div class="col-md-10 col-xs-8" id="chiTietBinhLuan">
                               <p>${c.noiDung}</p>
-                              <p><em>${c.ngayTao}</em></p>
+                              <p><em>${moment(c.ngayTao).locale('vi').fromNow()}</em></p>
                       </div>
                 ` + vungBinhLuan.innerHTML // dấu `` trong javascript dùng để cộng chuỗi bất kì
             } else if(data.code == 404)

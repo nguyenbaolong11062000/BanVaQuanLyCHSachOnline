@@ -1,6 +1,6 @@
 import hashlib
 from nha_sach.models import PhanQuyen, Sach, KhachHang, DonHang, ChiTietDonHang, TacGiaVietSach, TacGia, BinhLuan
-from nha_sach import db
+from nha_sach import db, app
 from flask_login import current_user
 from sqlalchemy import or_
 
@@ -87,7 +87,7 @@ def ghiNhanHoaDon(gioHang):
 
     return False
 
-
+#thêm bình luận trong chi tiết sản phẩm
 def them_binhLuan(noiDung, ma_Sach):
     c = BinhLuan(NoiDung=noiDung, ma_Sach=ma_Sach, KhachHang=current_user)
 
@@ -95,3 +95,16 @@ def them_binhLuan(noiDung, ma_Sach):
     db.session.commit()
 
     return c
+
+
+#nạp tất cả bình luận từ csdl lên trang chi tiết sản phẩm của từng sản phẩm
+def nap_binhLuan(ma_sach, trang=1):
+    kichthuoc_trang = app.config['KICHTHUOC_BINHLUAN']
+    batdau = (trang - 1) * kichthuoc_trang
+
+    return BinhLuan.query.filter(BinhLuan.ma_Sach.__eq__(ma_sach))\
+                                .order_by(-BinhLuan.MaBL).slice(batdau, batdau + kichthuoc_trang).all()
+
+
+def dem_binhLuanCuaMotSanPham(ma_sach):
+    return BinhLuan.query.filter(BinhLuan.ma_Sach.__eq__(ma_sach)).count()

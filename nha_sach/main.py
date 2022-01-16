@@ -4,7 +4,7 @@ from flask import render_template, request, url_for, session, jsonify
 from nha_sach import app, login, utils, decorator
 from nha_sach.admin import *
 from flask_login import login_user, current_user
-import os, json
+import json, cloudinary.uploader, math
 
 from nha_sach.models import KhachHang
 
@@ -36,8 +36,11 @@ def danhsach_Sach():
 @app.route('/sach/<int:ma_sach>')
 def chitiet_Sach(ma_sach):
     cuon_sach = utils.thongtinSach_theoMaSach(ma_sach=ma_sach)
+    binhluan = utils.nap_binhLuan(ma_sach=ma_sach, trang=int(request.args.get('trang', 1)))
     return render_template('book-detail.html',
-                           cuon_sach=cuon_sach)
+                           binhluan=binhluan,
+                           cuon_sach=cuon_sach,
+                           soTrangBinhLuan=math.ceil(utils.dem_binhLuanCuaMotSanPham(ma_sach=ma_sach)/app.config['KICHTHUOC_BINHLUAN']))
 
 
 
@@ -98,15 +101,16 @@ def dangKyKhachHang():
             Email = request.form.get('Email')
             TenDangNhap = request.form.get('TenDangNhap')
             GioiTinh = request.form.get('GioiTinh')
+            duongDan_HinhAnh = None
             HinhAnh = request.files["hinhDaiDien"]
-
-            duongDan_HinhAnh = 'images/upload/%s' % HinhAnh.filename
-            HinhAnh.save(os.path.join(app.root_path, 'static/', duongDan_HinhAnh))
+            if HinhAnh:
+                c = cloudinary.uploader.upload(HinhAnh)
+                duongDan_HinhAnh = c['secure_url'] #'sercure_url' là trả ra đường dẫn đến với chỗ hình ảnh trên cloudinary
 
             if utils.themKhachHang(Ho=Ho, Ten=Ten, Email=Email, SoDT=soDT,
                                    TenDangNhap=TenDangNhap, GioiTinh=GioiTinh,
                                    MatKhau=matKhau, HinhAnh=duongDan_HinhAnh):
-                return redirect('/')
+                return redirect(url_for('dangNhap'))
             else:
                 thong_bao = "Hệ thống đang lỗi ... Vui lòng quay lại sau!"
         else:
@@ -203,6 +207,7 @@ def capNhatSanPham_trongGioHang(ma_sanPham):
                             'tongTien': tongTien})
     return jsonify({'code': 500})
 
+#thêm bình luận trong chi tiết sản phẩm
 @app.route('/api/binhLuan', methods=['post'])
 def them_binhLuan():
     duLieu = request.json

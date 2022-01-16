@@ -7,10 +7,13 @@
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script><!-- đường dẫn để định nghĩa thời gian -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script><!-- đường dẫn để định nghĩa thời gian bằng tiếng việt -->
 </head>
 <body style="background-image: url('../static/images/product2.jpg');">
     <div class="container">
-        <h1 class="text-center text-danger">{{ cuon_sach.TuaSach }}</h1>
+        <h1 class="text-center text-danger"><a class="btn btn-primary" href=" {{ url_for('danhsach_Sach') }} ">
+                                <i class="fa fa-search"></i></a> {{ cuon_sach.TuaSach }}</h1>
         <div class="row">
             <div class="col-md-6">
                 <img src="{{ url_for('static', filename=cuon_sach.HinhAnh) }}" />
@@ -50,16 +53,31 @@
                         </div>
                     </div>
                     <div id="hienThiBinhLuan">
+                        {% for c in binhluan %}
                         <div class="row">
                             <div class="col-md-2 col-xs-4">
-                                <img src="{{ url_for('static', filename='images/baoLong.png') }}" class="img-fluid rounded-circle" alt="binhLuan"/>
+                                {% if c.KhachHang.HinhAnh.startswith('https') %} <!-- kiểm tra xem Ảnh có là ảnh trên cloudinary hay không? -->
+                                    <img src="{{ c.KhachHang.HinhAnh }}" class="img-fluid rounded-circle" alt="binhLuan"/><!--c.KhacHang => KhachHang là backref bên models để truy cập trong quang hệ 1-N-->
+                                {% else %}
+                                    <img src="{{ url_for('static', filename='images/baoLong.png') }}" class="img-fluid rounded-circle" alt="binhLuan"/>
+                                {% endif %}
                             </div>
                             <div class="col-md-10 col-xs-8" id="chiTietBinhLuan">
-                                <p>Sản phẩm tuyệt vời</p>
-                                <p><em>2022-01-14 10:07</em></p>
+                                <p>{{ c.NoiDung }}</p>
+                                <p><em class="ngayTao">{{ c.NgayTao }}</em></p>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
+                    {% if soTrangBinhLuan > 1 %} <!--phân trang bình luận-->
+                    <ul class="pagination">
+                        {% for x in range(1, soTrangBinhLuan + 1) %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('chitiet_Sach', ma_sach=cuon_sach.MaSach, trang=x) }}">{{ x }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
                 </h3>
             </div>
         </div>
@@ -89,5 +107,13 @@
             </div>
         </div>
     </div>
+    <!--định nghĩa thời gian bằng tiếng việt-->
+<script>
+    window.onload = function(){
+        let n = document.getElementsByClassName('ngayTao')
+        for(let i = 0; i < n.length; i++)
+            n[i].innerText = moment(n[i].innerText).locale('vi').fromNow()
+    }
+</script>
 </body>
 </html>>

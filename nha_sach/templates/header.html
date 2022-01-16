@@ -3,7 +3,7 @@
             <div class="container">
                 {% if current_user.is_authenticated %}
                 <div class="welcome">Chào mừng bạn đến với nhà sách :
-                    <i class="fa fa-user"></i>
+                    <img src="{{ current_user.HinhAnh }}" class="img-fluid rounded-circle" alt="binhLuan" id="hinhAnhDD"/>
                     {{ current_user.Ho }} {{ current_user.Ten }}
                 </div>
                 {% endif %}
