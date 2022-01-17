@@ -258,3 +258,7 @@ button {
 #chiTietBinhLuan {
     color: white;
 }
+
+#TenKhachHang {
+    text-decoration-line: underline;
+}

@@ -122,6 +122,7 @@ function themBinhLuan(ma_Sach) {
                               <img src="${c.KH.anhDaiDien}" class="img-fluid rounded-circle" alt="binhLuan"/>
                           </div>
                           <div class="col-md-10 col-xs-8" id="chiTietBinhLuan">
+                              <p>${c.KH.TenKH}</p>
                               <p>${c.noiDung}</p>
                               <p><em>${moment(c.ngayTao).locale('vi').fromNow()}</em></p>
                       </div>

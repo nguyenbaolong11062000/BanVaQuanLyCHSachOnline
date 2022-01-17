@@ -63,10 +63,12 @@
                                 {% endif %}
                             </div>
                             <div class="col-md-10 col-xs-8" id="chiTietBinhLuan">
+                                <p id="TenKhachHang">{{ c.KhachHang.Ten }}</p>
                                 <p>{{ c.NoiDung }}</p>
                                 <p><em class="ngayTao">{{ c.NgayTao }}</em></p>
                             </div>
                         </div>
+                        <br />
                         {% endfor %}
                     </div>
                     {% if soTrangBinhLuan > 1 %} <!--phân trang bình luận-->

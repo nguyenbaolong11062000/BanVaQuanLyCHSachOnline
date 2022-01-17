@@ -224,7 +224,8 @@ def them_binhLuan():
         'ngayTao': c.NgayTao,
         'KH': {
             'EmailKH': current_user.Email,
-            'anhDaiDien': current_user.HinhAnh
+            'anhDaiDien': current_user.HinhAnh,
+            'TenKH': current_user.Ten
         }
     }}
 
